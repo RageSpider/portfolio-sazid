@@ -4,72 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sazidur Rahman's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
   <div class="stars" id="stars-container"></div>
-  <div class="lines">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </div>
+  <div class="lines" id="lines-container"></div>
   <section id="hero">
-    <h1>Sazidur Rahman</h1>
-    <p>Student | Founder | Web Developer</p>
+    <div class="hero-container">
+      <h1>Sazidur Rahman</h1>
+      <p>Student | Founder | Web Developer</p>
+    </div>
   </section>
   <section id="about">
     <h2>About Me</h2>
-    <p>I am a passionate student from Dhaka, Bangladesh, currently pursuing my Intermediate 1st Year at University Laboratory School and College, I.E.R, DU, Dhaka. I am the founder of the United Club Association (UCA) and Exotic Royalms, showcasing my leadership and entrepreneurial spirit.</p>
-  </section>
-  <section id="education">
-    <h2>Education</h2>
     <div class="card">
-      <img src="logo1.png" alt="Nure Mohammadia Logo" class="logo">
-      <p>SSC: GPA 5.00, Nure Mohammadia (Sm.) Hafizia Alim Madrasa, Bashabo, Dhaka</p>
-    </div>
-    <div class="card">
-      <img src="logo2.png" alt="University Laboratory School and College Logo" class="logo">
-      <p>HSC: Currently studying at University Laboratory School and College, I.E.R, DU, Dhaka</p>
-    </div>
-  </section>
-  <section id="achievements">
-    <h2>Achievements</h2>
-    <div class="card">
-      <img src="uca_logo.png" alt="UCA Logo" class="logo">
-      <p>Founder, United Club Association (UCA)</p>
-    </div>
-    <div class="card">
-      <p>Founder, Exotic Royalms</p>
+      <p>I am a passionate student from Dhaka, Bangladesh, currently pursuing my Intermediate 1st Year at University Laboratory School and College, I.E.R, DU, Dhaka. I am the founder of the United Club Association (UCA) and Exotic Royalms, showcasing my leadership and entrepreneurial spirit.</p>
     </div>
   </section>
   <section id="skills">
     <h2>Skills</h2>
-    <ul>
-      <li>HTML</li>
-      <li>CSS</li>
-      <li>JavaScript</li>
-    </ul>
+    <div class="card-grid">
+      <div class="card" data-delay="0.1s">
+        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/html5/html5-original.svg" alt="HTML Logo">
+        <p>HTML</p>
+      </div>
+      <div class="card" data-delay="0.2s">
+        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/css3/css3-original.svg" alt="CSS Logo">
+        <p>CSS</p>
+      </div>
+      <div class="card" data-delay="0.3s">
+        <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/javascript/javascript-original.svg" alt="JavaScript Logo">
+        <p>JavaScript</p>
+      </div>
+    </div>
+  </section>
+  <section id="education">
+    <h2>Education</h2>
+    <div class="card-grid">
+      <div class="card" data-delay="0.1s">
+        <p><strong>Institute:</strong> Nure Mohammadia (Sm.) Hafizia Alim Madrasa</p>
+        <p><strong>Grade:</strong> SSC, GPA 5.00</p>
+        <p><strong>Address:</strong> Bashabo, Dhaka</p>
+      </div>
+      <div class="card" data-delay="0.2s">
+        <p><strong>Institute:</strong> University Laboratory School and College, I.E.R, DU</p>
+        <p><strong>Grade:</strong> HSC, Currently Studying</p>
+        <p><strong>Address:</strong> Dhaka</p>
+      </div>
+    </div>
+  </section>
+  <section id="achievements">
+    <h2>Achievements</h2>
+    <div class="card-grid">
+      <div class="card" data-delay="0.1s">
+        <img src="UCA_Logo_Dark-BG-Removed.png" alt="UCA Logo">
+        <p><strong>Founder:</strong> United Club Association (UCA)</p>
+      </div>
+      <div class="card" data-delay="0.2s">
+        <img src="https://via.placeholder.com/80" alt="Exotic Royalms Logo">
+        <p><strong>Founder:</strong> Exotic Royalms</p>
+      </div>
+    </div>
   </section>
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:hub9962@gmail.com">hub9962@gmail.com</a></p>
-    <p>Phone: <a href="tel:+8801886150418">+8801886150418</a></p>
-    <p>LinkedIn: <a href="#" id="linkedin">Add your LinkedIn link here</a></p>
-    <p>Address: 80/A, Kadamtala Hirajheel Goli, Bashabo, Sabujbag, Dhaka, Bangladesh</p>
+    <div class="card">
+      <a href="mailto:hub9962@gmail.com"><i class="fas fa-envelope"></i> hub9962@gmail.com</a>
+      <a href="tel:+8801886150418"><i class="fas fa-phone"></i> +8801886150418</a>
+      <a href="#" id="linkedin"><i class="fab fa-linkedin"></i> Add your LinkedIn link here</a>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> 80/A, Kadamtala Hirajheel Goli, Bashabo, Sabujbag, Dhaka, Bangladesh</a>
+    </div>
   </section>
-  <div id="custom-cursor"></div>
   <script src="index.js"></script>
 </body>
 </html>
