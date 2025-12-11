@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazidur Rahman — Founder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,600,700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #0f0a05; --text-color: #e8dcc6; --accent: #7c2d12; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Inter', sans-serif; cursor: none; }
+        .font-clash { font-family: 'Clash Display', sans-serif; }
+        
+        .timeline-line { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.1); }
+        .timeline-item:hover .timeline-dot { transform: scale(1.5); background: var(--accent); }
+        .timeline-dot { transition: all 0.3s; }
+
+        /* Cursor */
+        .cursor { position: fixed; width: 20px; height: 20px; border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: all 0.3s; }
+        .cursor.active { background: var(--accent); transform: translate(-50%, -50%) scale(2); opacity: 0.5; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <div class="cursor"></div>
+
+    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-50">
+        <a href="/" class="text-xl font-clash font-bold tracking-widest hover-trigger">SAZIDUR</a>
+        <div class="text-xs font-mono opacity-50">FOUNDER // 2025</div>
+    </nav>
+
+    <main class="pt-40 pb-20 px-6 md:px-20 max-w-4xl mx-auto">
+        <header class="mb-32">
+            <h1 class="font-clash text-6xl md:text-8xl font-bold mb-8">VISION & <br> <span class="text-[#7c2d12]">STRATEGY</span></h1>
+            <p class="opacity-60 text-lg max-w-md">Leading organizations through technological innovation and structural integrity.</p>
+        </header>
+
+        <section class="relative pl-8 md:pl-20 border-l border-white/10" id="founder-list">
+            <!-- JS Injected -->
+        </section>
+        
+        <div class="mt-32 p-8 bg-[#1a110a] rounded-lg border border-white/5">
+            <h3 class="font-clash text-2xl mb-4">Philosophy</h3>
+            <p class="opacity-60 leading-relaxed">
+                "Leadership is not just about management; it's about creating ecosystems where creativity and engineering can coexist to solve real-world problems."
+            </p>
+        </div>
+    </main>
+
+    <script type="module">
+        import { profile } from '../data/profile.js';
+
+        const list = document.getElementById('founder-list');
+        profile.projects.founder.forEach((role, i) => {
+            const div = document.createElement('div');
+            div.className = "mb-20 relative hover-trigger group";
+            div.innerHTML = `
+                <div class="absolute -left-[calc(5rem+5px)] top-2 w-3 h-3 bg-[#333] rounded-full timeline-dot group-hover:bg-[#7c2d12]"></div>
+                <span class="font-mono text-xs text-[#7c2d12] mb-2 block">${role.period}</span>
+                <h2 class="font-clash text-4xl mb-2 group-hover:text-white transition-colors">${role.org}</h2>
+                <h3 class="text-xl opacity-80 mb-4">${role.role}</h3>
+                <p class="opacity-50 max-w-md leading-relaxed">${role.desc}</p>
+            `;
+            list.appendChild(div);
+        });
+
+        // Simple Cursor
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('.hover-trigger').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+    </script>
+</body>
+</html>

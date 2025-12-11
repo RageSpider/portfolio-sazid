@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazidur Rahman — Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,600,700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #050505; --text-color: #e1e1e1; }
+        body { background-color: var(--bg-color); color: var(--text-color); cursor: none; overflow-x: hidden; }
+        
+        .font-clash { font-family: 'Clash Display', sans-serif; }
+        /* Bangla Font - Replace src with your Lipighor CDN if needed */
+        .font-bangla { font-family: 'SolaimanLipi', 'Kalpurush', 'Siyam Rupali', sans-serif; }
+
+        /* Lenis Smooth Scroll */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+
+        /* Cursor */
+        .cursor { position: fixed; width: 20px; height: 20px; border: 1px solid rgba(255,255,255,0.5); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s; mix-blend-mode: difference; }
+        .cursor.active { width: 50px; height: 50px; background: white; border-color: transparent; mix-blend-mode: difference; }
+
+        /* Project Card */
+        .project-card { border-top: 1px solid rgba(255,255,255,0.1); transition: background 0.3s; }
+        .project-card:hover { background: rgba(255,255,255,0.03); }
+        .project-num { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference text-white">
+        <a href="/" class="text-xl font-clash font-bold tracking-widest hover-trigger">SAZIDUR</a>
+        <div class="flex gap-4 text-xs font-mono text-gray-400">
+            <span>ENGINEER</span>
+            <span>//</span>
+            <span>2025</span>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-6 md:px-20 max-w-screen-2xl mx-auto">
+        <!-- Header -->
+        <header class="mb-32">
+            <h1 class="font-clash text-7xl md:text-9xl font-semibold leading-[0.9]">
+                SYSTEMS <br> <span class="text-gray-600">ARCHITECT</span>
+            </h1>
+            <p class="mt-8 text-gray-400 max-w-lg leading-relaxed">
+                Building scalable digital ecosystems. From linguistic tools to club management platforms.
+            </p>
+        </header>
+
+        <!-- Projects -->
+        <section id="work" class="mb-32">
+            <h2 class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-8">Selected Works</h2>
+            <div id="project-list" class="flex flex-col">
+                <!-- JS Injected -->
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="mb-32">
+            <h2 class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-8">Arsenal</h2>
+            <div id="stack-grid" class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- JS Injected -->
+            </div>
+        </section>
+        
+        <footer class="border-t border-gray-800 pt-8 flex justify-between text-gray-500 text-sm font-mono">
+            <span>© 2025 Sazidur Rahman</span>
+            <a href="mailto:hub9962@gmail.com" class="hover:text-white transition-colors">hub9962@gmail.com</a>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script type="module">
+        import { profile } from '../data/profile.js';
+
+        // 1. Projects
+        const list = document.getElementById('project-list');
+        profile.projects.engineering.forEach((p, i) => {
+            const div = document.createElement('div');
+            div.className = "project-card py-12 flex flex-col md:flex-row justify-between items-baseline group cursor-pointer hover-trigger";
+            div.onclick = () => window.open(p.url, '_blank');
+            
+            // Check for Bangla Font requirement
+            const titleClass = p.isBangla ? "font-bangla text-3xl md:text-4xl" : "font-clash text-4xl md:text-5xl uppercase";
+            
+            div.innerHTML = `
+                <div class="flex items-baseline gap-6 md:w-1/2">
+                    <span class="project-num text-xs text-gray-600">0${i+1}</span>
+                    <div>
+                        <h3 class="${titleClass} text-white mb-2 group-hover:translate-x-2 transition-transform duration-300">${p.title}</h3>
+                        <p class="text-sm text-gray-500 font-mono">${p.tech.join(' / ')}</p>
+                    </div>
+                </div>
+                <div class="mt-4 md:mt-0 md:w-1/2 flex justify-between items-center w-full">
+                    <p class="text-gray-400 text-sm max-w-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">${p.description}</p>
+                    <span class="text-xs uppercase border border-gray-800 rounded-full px-4 py-2 group-hover:bg-white group-hover:text-black transition-colors">View</span>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+
+        // 2. Stack
+        const stack = document.getElementById('stack-grid');
+        profile.arsenal.forEach(cat => {
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <h4 class="text-white font-clash mb-4">${cat.category}</h4>
+                <ul class="text-gray-500 space-y-2 text-sm">
+                    ${cat.items.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            `;
+            stack.appendChild(div);
+        });
+
+        // 3. Lenis & Cursor
+        const lenis = new Lenis();
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('.hover-trigger').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+    </script>
+</body>
+</html>

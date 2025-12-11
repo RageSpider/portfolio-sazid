@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazidur Rahman — Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,600,700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <style>
+        :root { --bg-color: #050205; --text-color: #e9d5ff; --accent: #d946ef; }
+        body { background-color: var(--bg-color); color: var(--text-color); margin: 0; overflow-x: hidden; }
+        
+        /* Fonts */
+        .font-clash { font-family: 'Clash Display', sans-serif; }
+        
+        /* BANGLA FONT CONFIGURATION */
+        /* Paste your Lipighor or other CDN import here */
+        /* @import url('https://...'); */
+        
+        .font-bangla { 
+            font-family: 'Hind Siliguri', 'SolaimanLipi', 'Kalpurush', sans-serif; 
+            line-height: 1.4;
+        }
+
+        /* Cursor */
+        .cursor { position: fixed; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: exclusion; transition: transform 0.2s; }
+        .cursor.active { transform: translate(-50%, -50%) scale(6); background: white; mix-blend-mode: difference; }
+
+        /* Layout Utilities */
+        .horizontal-container { width: 400%; display: flex; flex-wrap: nowrap; height: 100vh; }
+        .panel { width: 100vw; height: 100vh; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; border-right: 1px solid rgba(255,255,255,0.05); }
+        
+        /* Text Effects */
+        .outline-text { -webkit-text-stroke: 1px rgba(255,255,255,0.3); color: transparent; transition: all 0.5s; }
+        .panel:hover .outline-text { color: white; -webkit-text-stroke: 0px; }
+        
+        /* Noise Overlay */
+        .noise { position: fixed; inset: 0; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJnoiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIwLjAzIi8+PC9zdmc+'); pointer-events: none; z-index: 50; }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference">
+        <a href="/" class="text-xl font-clash font-bold tracking-widest hover-trigger">SAZIDUR</a>
+        <div class="flex gap-4">
+            <span class="text-xs font-mono text-purple-400 uppercase">Creator Mode</span>
+        </div>
+    </nav>
+
+    <!-- Main Scroll Container -->
+    <main class="overflow-hidden">
+        
+        <!-- Section 1: Intro -->
+        <section class="h-screen w-full flex flex-col justify-center items-center relative">
+            <h1 class="font-clash text-[12vw] leading-none font-bold uppercase text-center mix-blend-overlay opacity-50">
+                Visionary
+            </h1>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <p class="font-mono text-sm md:text-base max-w-md text-center text-gray-400 leading-relaxed p-4">
+                    "Expanding the boundaries of narrative through code, language, and visual art."
+                </p>
+            </div>
+            <div class="absolute bottom-10 animate-bounce text-xs uppercase tracking-widest text-purple-500">
+                Scroll to Explore
+            </div>
+        </section>
+
+        <!-- Section 2: Current Works (Vertical List) -->
+        <section class="min-h-screen py-32 px-6 md:px-20 relative z-10 bg-[#050205]">
+            <h2 class="font-mono text-xs uppercase tracking-widest text-purple-500 mb-20 border-b border-white/10 pb-4">Currently In Production</h2>
+            
+            <div id="works-container" class="flex flex-col gap-32">
+                <!-- JS Injected Works -->
+            </div>
+        </section>
+
+        <!-- Section 3: Future Vision (Horizontal Scroll) -->
+        <section id="future-section" class="h-screen w-full overflow-hidden relative bg-[#0f0518]">
+            <div class="horizontal-container flex items-center">
+                <div class="panel w-screen flex-col items-start justify-center px-20">
+                    <h2 class="font-clash text-8xl font-bold mb-8">FUTURE <br> <span class="text-purple-500">VISIONS</span></h2>
+                    <p class="font-mono text-gray-400 max-w-sm">The roadmap for the next decade. Exploring new mediums of storytelling.</p>
+                </div>
+                <!-- JS Injected Future Items -->
+                <div id="future-items" class="flex"></div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="h-[50vh] flex flex-col justify-center items-center text-center bg-black relative z-10">
+            <h2 class="font-clash text-4xl mb-6">Collaborate?</h2>
+            <a href="mailto:hub9962@gmail.com" class="text-2xl font-mono text-purple-500 hover:text-white transition-colors hover-trigger">hub9962@gmail.com</a>
+            <div class="mt-12 flex gap-8 text-sm font-mono text-gray-600">
+                <a href="https://github.com/ragespider" class="hover:text-white transition-colors">Github</a>
+                <a href="https://facebook.com/SazidSaysAnything" class="hover:text-white transition-colors">Facebook</a>
+            </div>
+        </footer>
+
+    </main>
+
+    <script type="module">
+        import { profile } from '../data/profile.js';
+
+        // 1. Render Current Works
+        const worksContainer = document.getElementById('works-container');
+        profile.projects.creator.forEach((work, i) => {
+            const isRight = i % 2 !== 0;
+            const div = document.createElement('div');
+            div.className = `flex flex-col md:flex-row ${isRight ? 'md:flex-row-reverse' : ''} gap-12 items-center group`;
+            
+            // Determine styling based on language
+            const titleClass = work.isBangla ? 'font-bangla text-5xl md:text-7xl' : 'font-clash text-5xl md:text-7xl uppercase';
+            
+            div.innerHTML = `
+                <div class="w-full md:w-1/2 aspect-video bg-[#1a0b2e] rounded-lg overflow-hidden relative hover-trigger">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/40 to-transparent group-hover:opacity-100 transition-opacity"></div>
+                    <!-- Placeholder visual for abstract art -->
+                    <div class="absolute inset-0 flex items-center justify-center text-purple-900 font-clash text-9xl opacity-20 select-none">
+                        ${work.type.charAt(0)}
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="px-3 py-1 border border-purple-500/30 rounded-full text-xs font-mono text-purple-400 uppercase">${work.status}</span>
+                        <span class="text-xs font-mono text-gray-500">${work.type}</span>
+                    </div>
+                    <h3 class="${titleClass} font-bold mb-6 text-white group-hover:text-purple-300 transition-colors">${work.title}</h3>
+                    <p class="text-gray-400 font-mono leading-relaxed max-w-md border-l border-purple-900 pl-6">
+                        ${work.desc}
+                    </p>
+                </div>
+            `;
+            worksContainer.appendChild(div);
+        });
+
+        // 2. Render Future Items (Horizontal)
+        const futureContainer = document.querySelector('.horizontal-container');
+        profile.projects.future.forEach((item, i) => {
+            const panel = document.createElement('div');
+            panel.className = "panel w-screen flex-shrink-0 flex flex-col justify-center items-center hover-trigger group";
+            panel.innerHTML = `
+                <h3 class="font-clash text-[8vw] font-bold outline-text group-hover:scale-110 transition-transform duration-700">${item}</h3>
+                <div class="mt-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-mono text-purple-400">
+                    Phase 0${i+1} // Exploring Medium
+                </div>
+            `;
+            futureContainer.appendChild(panel);
+        });
+
+        // 3. Animations & Logic
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({ lerp: 0.1 });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // Horizontal Scroll Logic
+        const container = document.querySelector(".horizontal-container");
+        gsap.to(container, {
+            x: () => -(container.scrollWidth - document.documentElement.clientWidth) + "px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#future-section",
+                pin: true,
+                scrub: 1,
+                end: () => "+=" + container.scrollWidth
+            }
+        });
+
+        // Vertical Parallax for Works
+        gsap.utils.toArray('#works-container > div').forEach(div => {
+            gsap.from(div.querySelector('div:first-child'), {
+                yPercent: 20,
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: div,
+                    start: "top 80%",
+                    scrub: 1
+                }
+            });
+        });
+
+        // Cursor Logic
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+        });
+        
+        document.querySelectorAll('.hover-trigger').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+    </script>
+</body>
+</html>
