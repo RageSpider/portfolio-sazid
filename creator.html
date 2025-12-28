@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazidur Rahman — Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,600,700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <style>
+        :root { --bg-color: #050205; --text-color: #e9d5ff; --accent: #d946ef; }
+        body { background-color: var(--bg-color); color: var(--text-color); margin: 0; overflow-x: hidden; }
+        
+        /* Fonts */
+        .font-clash { font-family: 'Clash Display', sans-serif; }
+        .font-bangla { font-family: 'Hind Siliguri', sans-serif; line-height: 1.4; }
+
+        /* Cursor */
+        .cursor { position: fixed; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: exclusion; transition: transform 0.2s; }
+        .cursor.active { transform: translate(-50%, -50%) scale(6); background: white; mix-blend-mode: difference; }
+
+        @media (max-width: 768px) {
+            .cursor { display: none; }
+        }
+
+        /* Nav Links */
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0%; height: 1px; background: var(--accent); transition: width 0.3s; }
+        .nav-link:hover::after { width: 100%; }
+
+        /* --- HORIZONTAL SCROLL SECTION --- */
+        #future-section { 
+            position: relative; 
+            overflow: hidden; 
+            background: #0f0518;
+            height: 100vh;
+        }
+
+        .horizontal-container { 
+            display: flex; 
+            flex-wrap: nowrap; 
+            height: 100%; 
+            width: fit-content; 
+            will-change: transform;
+        }
+        
+        .panel { 
+            width: 100vw; 
+            height: 100vh; 
+            flex-shrink: 0; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            border-right: 1px solid rgba(255,255,255,0.05); 
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Mobile specific scroll overrides */
+        @media (max-width: 768px) {
+            #future-section {
+                height: auto;
+                min-height: 60vh;
+                overflow-x: auto; /* Enable native horizontal scroll */
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory; /* Snap behavior */
+                -webkit-overflow-scrolling: touch;
+            }
+            .horizontal-container {
+                width: max-content; /* Let it grow naturally */
+                height: 100%;
+            }
+            .panel {
+                width: 85vw; /* Slightly smaller than screen to show next item peeking */
+                height: 60vh;
+                scroll-snap-align: center;
+                border-right: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+        
+        /* Text Effects */
+        .outline-text { -webkit-text-stroke: 1px rgba(255,255,255,0.3); color: transparent; transition: all 0.5s; }
+        .panel:hover .outline-text { color: white; -webkit-text-stroke: 0px; }
+        
+        /* Noise Overlay */
+        .noise { position: fixed; inset: 0; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJnoiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2cpIiBvcGFjaXR5PSIwLjAzIi8+PC9zdmc+'); pointer-events: none; z-index: 50; }
+
+        /* Panel Visuals */
+        .panel-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        .panel-desc {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 1.5rem;
+            max-width: 300px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s;
+        }
+        .panel:hover .panel-desc { opacity: 1; transform: translateY(0); }
+        
+        /* Mobile: always show desc */
+        @media (max-width: 768px) {
+            .panel-desc { opacity: 1; transform: translateY(0); }
+            .outline-text { -webkit-text-stroke: 0px; color: white; } /* No hover effect on mobile */
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor hidden md:block"></div>
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full p-6 md:p-8 flex flex-col md:flex-row justify-between items-center z-50 mix-blend-difference gap-4 md:gap-0">
+        <div class="flex items-center gap-8 w-full md:w-auto justify-between md:justify-start">
+            <a href="index.html" class="text-xl font-clash font-bold tracking-widest hover-trigger">SAZIDUR</a>
+            
+            <div class="flex md:hidden gap-4 text-[10px] font-mono text-purple-400">
+                <span>CREATOR</span>
+            </div>
+        </div>
+
+        <div class="flex gap-6 text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider bg-black/50 md:bg-transparent backdrop-blur-md md:backdrop-blur-none px-6 py-3 md:p-0 rounded-full border border-white/10 md:border-none">
+            <a href="engineer.html" class="nav-link hover:text-white transition-colors hover-trigger">Engineer</a>
+            <a href="founder.html" class="nav-link hover:text-white transition-colors hover-trigger">Founder</a>
+            <a href="about.html" class="nav-link text-purple-400 hover:text-white transition-colors hover-trigger font-bold">About Me</a>
+        </div>
+
+        <div class="hidden md:flex gap-4">
+            <span class="text-xs font-mono text-purple-400 uppercase">Creator Mode</span>
+        </div>
+    </nav>
+
+    <!-- Main Scroll Container -->
+    <main class="overflow-hidden">
+        
+        <!-- Section 1: Intro -->
+        <section class="h-screen w-full flex flex-col justify-center items-center relative px-4">
+            <h1 class="font-clash text-[12vw] md:text-[12vw] leading-none font-bold uppercase text-center mix-blend-overlay opacity-50 select-none">
+                Visionary
+            </h1>
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <p class="font-mono text-sm md:text-base max-w-md text-center text-gray-400 leading-relaxed p-4 bg-black/50 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none rounded">
+                    "Expanding the boundaries of narrative through code, language, and visual art."
+                </p>
+            </div>
+            <div class="absolute bottom-10 animate-bounce text-xs uppercase tracking-widest text-purple-500">
+                Scroll to Explore
+            </div>
+        </section>
+
+        <!-- Section 2: Current Works -->
+        <section class="min-h-screen py-20 md:py-32 px-6 md:px-20 relative z-10 bg-[#050205]">
+            <h2 class="font-mono text-xs uppercase tracking-widest text-purple-500 mb-12 md:mb-20 border-b border-white/10 pb-4">Currently In Production</h2>
+            <div id="works-container" class="flex flex-col gap-24 md:gap-32">
+                <!-- JS Injected Works -->
+            </div>
+        </section>
+
+        <!-- Section 3: Future Vision -->
+        <section id="future-section">
+            <div class="horizontal-container">
+                <div class="panel">
+                    <h2 class="font-clash text-5xl md:text-8xl font-bold mb-4 md:mb-8">FUTURE <br> <span class="text-purple-500">VISIONS</span></h2>
+                    <p class="font-mono text-gray-400 max-w-sm text-sm md:text-base">The roadmap for the next decade.</p>
+                    <span class="text-xs text-purple-500 mt-4 animate-pulse md:hidden">Swipe →</span>
+                </div>
+                <!-- JS Injected Future Items -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-20 md:h-[50vh] flex flex-col justify-center items-center text-center bg-black relative z-10">
+            <h2 class="font-clash text-3xl md:text-4xl mb-6">Collaborate?</h2>
+            <a href="mailto:hub9962@gmail.com" class="text-xl md:text-2xl font-mono text-purple-500 hover:text-white transition-colors hover-trigger">hub9962@gmail.com</a>
+            <div class="mt-12 flex gap-8 text-sm font-mono text-gray-600">
+                <a href="https://github.com/ragespider" class="hover:text-white transition-colors">Github</a>
+                <a href="https://facebook.com/SazidSaysAnything" class="hover:text-white transition-colors">Facebook</a>
+            </div>
+        </footer>
+
+    </main>
+
+    <script type="module">
+        import { profile } from './profile.js';
+
+        // 1. Render Current Works
+        const worksContainer = document.getElementById('works-container');
+        profile.projects.creator.forEach((work, i) => {
+            const isRight = i % 2 !== 0;
+            const div = document.createElement('div');
+            div.className = `flex flex-col md:flex-row ${isRight ? 'md:flex-row-reverse' : ''} gap-8 md:gap-12 items-center group`;
+            const titleClass = work.isBangla ? 'font-bangla text-4xl md:text-7xl' : 'font-clash text-4xl md:text-7xl uppercase';
+            
+            div.innerHTML = `
+                <div class="w-full md:w-1/2 aspect-video bg-[#1a0b2e] rounded-lg overflow-hidden relative hover-trigger shadow-2xl shadow-purple-900/10 border border-white/5">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/40 to-transparent group-hover:opacity-100 transition-opacity"></div>
+                    <div class="absolute inset-0 flex items-center justify-center text-purple-900 font-clash text-8xl md:text-9xl opacity-20 select-none">
+                        ${work.type.charAt(0)}
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="px-3 py-1 border border-purple-500/30 rounded-full text-[10px] md:text-xs font-mono text-purple-400 uppercase bg-purple-900/10">${work.status}</span>
+                        <span class="text-[10px] md:text-xs font-mono text-gray-500">${work.type}</span>
+                    </div>
+                    <h3 class="${titleClass} font-bold mb-4 md:mb-6 text-white group-hover:text-purple-300 transition-colors">${work.title}</h3>
+                    <p class="text-gray-400 text-sm md:text-base font-mono leading-relaxed max-w-md border-l border-purple-900 pl-4 md:pl-6">
+                        ${work.desc}
+                    </p>
+                </div>
+            `;
+            worksContainer.appendChild(div);
+        });
+
+        // 2. Render Future Items
+        const futureContainer = document.querySelector('.horizontal-container');
+        profile.projects.future.forEach((item, i) => {
+            const panel = document.createElement('div');
+            panel.className = "panel hover-trigger group";
+            panel.innerHTML = `
+                <div class="panel-number">PHASE 0${i+1}</div>
+                <h3 class="font-clash text-5xl md:text-[6vw] font-bold outline-text group-hover:scale-110 transition-transform duration-700 leading-none">${item}</h3>
+                <div class="panel-desc">
+                   Exploring new mediums to tell stories that matter.
+                </div>
+            `;
+            futureContainer.appendChild(panel);
+        });
+
+        // 3. Animations & Logic
+        gsap.registerPlugin(ScrollTrigger);
+        
+        const lenis = new Lenis({ lerp: 0.1 });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // DESKTOP ONLY: GSAP Horizontal Scroll
+        if (window.matchMedia("(min-width: 769px)").matches) {
+            const container = document.querySelector(".horizontal-container");
+            const panels = gsap.utils.toArray(".panel");
+            // Set explicit width for container: (number of panels * 100vw)
+            const totalWidthPercent = panels.length * 100;
+            container.style.width = `${totalWidthPercent}%`;
+            
+            // Calculate strictly the exact amount we need to translate horizontally
+            // container.offsetWidth includes the intro panel + all future panels
+            // We want to stop exactly when the last panel is fully in view.
+            // Translation amount = (Total Width) - (Viewport Width)
+            
+            gsap.to(container, {
+                x: () => -(container.scrollWidth - document.documentElement.clientWidth) + "px",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#future-section",
+                    pin: true,
+                    scrub: 1,
+                    // end needs to be strictly related to scrolling distance
+                    // Setting end to exact pixel width of horizontal scroll usually works best
+                    end: () => "+=" + (container.scrollWidth - document.documentElement.clientWidth)
+                }
+            });
+        } 
+        // MOBILE ONLY: Native Scroll enhancements (no GSAP for layout)
+        else {
+             // We let CSS handle the layout and snapping.
+             // GSAP or Lenis might conflict with native horizontal scroll if not careful, 
+             // but Lenis usually handles vertical only.
+        }
+
+        // Vertical Parallax for Works
+        gsap.utils.toArray('#works-container > div').forEach(div => {
+            gsap.from(div.querySelector('div:first-child'), {
+                yPercent: 20,
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: div,
+                    start: "top 80%",
+                    scrub: 1
+                }
+            });
+        });
+
+        // Cursor Logic (Desktop Only)
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            const cursor = document.querySelector('.cursor');
+            document.addEventListener('mousemove', (e) => {
+                gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            });
+            
+            document.querySelectorAll('.hover-trigger').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+            });
+        }
+
+    </script>
+</body>
+</html>
