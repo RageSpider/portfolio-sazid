@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koi Jaben - Brand Identity</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fallback Google Fonts for the wordmark -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Config & Custom Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        /* We prioritize Ekushey exactly as requested. If the user has it installed, it renders perfectly. */
+                        ekushey: ['Ekushey', 'Ekushey Azad', 'Anek Bangla', 'sans-serif'],
+                        wordmark: ['Anek Bangla', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            base: '#0B1120',    /* Deep Travel Night */
+                            surface: '#1E293B', /* Slate 800 */
+                            cyan: '#06B6D4',    /* Primary Route Cyan */
+                            blue: '#3B82F6',    /* Secondary Blue */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B1120;
+            color: #F8FAFC;
+        }
+
+        .app-squircle {
+            border-radius: 22.5%; /* Apple's exact squircle ratio */
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.7),
+                inset 0 1px 2px rgba(255, 255, 255, 0.2),
+                inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* The Arrow SVG overlay configuration */
+        .arrow-overlay {
+            position: absolute;
+            pointer-events: none;
+            /* Adjusting position to sit perfectly on top of the 'K' matra line */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Glowing effect for the premium feel */
+        .glow-text {
+            text-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+        }
+        .glow-arrow {
+            filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.6));
+        }
+    </style>
+</head>
+<body class="antialiased pb-24 font-sans bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')]">
+
+    <!-- Header Section -->
+    <header class="max-w-6xl mx-auto px-6 pt-20 pb-16 border-b border-slate-800">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-900/30 border border-cyan-500/20 text-cyan-400 text-xs font-bold tracking-widest uppercase mb-6">
+            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+            Official Logo Lockup
+        </div>
+        <h1 class="text-4xl md:text-5xl font-wordmark font-bold text-white mb-4 tracking-tight">
+            কই যাবেন <span class="text-slate-600 font-sans font-light">| Koi Jaben</span>
+        </h1>
+        <p class="text-slate-400 font-sans max-w-2xl text-lg">
+            Built using the Ekushey font text character, transforming the missing matra into a dynamic directional arrow. This is the complete, real-world brand application.
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-16 space-y-24">
+
+        <section>
+            <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-8">1. The Primary App Icon</h2>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12 bg-brand-surface border border-slate-700/50 p-10 md:p-16 rounded-3xl">
+                
+                <!-- The Squircle App Icon -->
+                <div class="app-squircle w-48 h-48 md:w-64 md:h-64 flex items-center justify-center shrink-0 border border-slate-600/50">
+                    <div class="relative w-full h-full flex items-center justify-center">
+                        
+                        <!-- THE ACTUAL EKUSHEY FONT TEXT -->
+                        <span class="font-ekushey font-black text-[110px] md:text-[150px] leading-none text-white translate-y-4 translate-x-[-10px] glow-text">ক</span>
+                        
+                        <!-- THE ARROW OVERLAY -->
+                        <svg class="arrow-overlay glow-arrow" viewBox="0 0 200 200">
+                            <defs>
+                                <linearGradient id="arrowGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#06B6D4" /> <!-- Cyan -->
+                                    <stop offset="100%" stop-color="#3B82F6" /> <!-- Blue -->
+                                </linearGradient>
+                            </defs>
+                            <!-- 
+                              The path starts horizontally where the matra should be, 
+                              then curves smoothly up and to the right. 
+                            -->
+                            <path d="M 40,110 L 100,110 Q 150,110 160,50" fill="none" stroke="url(#arrowGrad)" stroke-width="16" stroke-linecap="round"/>
+                            <!-- Arrowhead -->
+                            <polygon points="140,55 180,45 165,85" fill="#3B82F6" />
+                        </svg>
+
+                    </div>
+                </div>
+
+                <!-- Specs -->
+                <div>
+                    <h3 class="text-2xl font-wordmark font-bold text-white mb-3">The "Directional K" Mark</h3>
+                    <p class="text-slate-400 mb-6 leading-relaxed">
+                        This is a true app icon. It uses a dark slate background to provide massive contrast for the white Ekushey 'ক'. The custom gradient arrow perfectly aligns with the font's natural matra line and breaks upwards, symbolizing travel, forward motion, and finding your destination.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 rounded-full bg-[#06B6D4]"></div>
+                            <span class="text-xs text-slate-300 font-mono">#06B6D4</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 rounded-full bg-[#3B82F6]"></div>
+                            <span class="text-xs text-slate-300 font-mono">#3B82F6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-8">2. Horizontal Lockup (For Websites & Headers)</h2>
+            
+            <div class="bg-brand-surface border border-slate-700/50 rounded-3xl p-10 flex flex-col items-center justify-center min-h-[200px]">
+                
+                <!-- Full Logo Wrapper -->
+                <div class="flex items-center gap-6">
+                    
+                    <!-- The Mark (Scaled down) -->
+                    <div class="relative w-16 h-16 flex items-center justify-center">
+                        <span class="font-ekushey font-black text-[50px] leading-none text-white translate-y-1 translate-x-[-2px]">ক</span>
+                        <svg class="arrow-overlay" viewBox="0 0 200 200">
+                            <path d="M 30,120 L 100,120 Q 150,120 160,50" fill="none" stroke="#06B6D4" stroke-width="20" stroke-linecap="round"/>
+                            <polygon points="135,55 185,40 165,90" fill="#06B6D4" />
+                        </svg>
+                    </div>
+
+                    <!-- The Wordmark -->
+                    <div class="flex flex-col justify-center">
+                        <span class="font-wordmark font-bold text-4xl text-white tracking-tight leading-none">কই যাবেন</span>
+                        <span class="font-sans text-[10px] text-cyan-400 font-bold tracking-[0.3em] uppercase mt-1">Smart Travel Ecosystem</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section>
+            <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-8">3. Real-World Application (Mobile Splash Screen)</h2>
+            
+            <div class="flex justify-center">
+                <!-- Mobile Device Frame -->
+                <div class="w-[320px] h-[650px] rounded-[40px] border-[8px] border-slate-900 bg-gradient-to-b from-brand-base to-slate-900 overflow-hidden relative shadow-2xl flex flex-col items-center justify-center">
+                    
+                    <!-- Status Bar Dummy -->
+                    <div class="absolute top-0 w-full h-8 flex justify-between items-center px-6">
+                        <span class="text-[10px] text-white/50">9:41</span>
+                        <div class="flex gap-1">
+                            <div class="w-3 h-3 rounded-full border border-white/50"></div>
+                            <div class="w-3 h-3 rounded-full border border-white/50"></div>
+                        </div>
+                    </div>
+
+                    <!-- Centered Logo -->
+                    <div class="relative w-32 h-32 flex items-center justify-center mb-6">
+                        <span class="font-ekushey font-black text-[100px] leading-none text-white translate-y-3 translate-x-[-5px]">ক</span>
+                        <svg class="arrow-overlay" viewBox="0 0 200 200">
+                            <path d="M 30,120 L 100,120 Q 150,120 160,50" fill="none" stroke="#06B6D4" stroke-width="20" stroke-linecap="round"/>
+                            <polygon points="135,55 185,40 165,90" fill="#06B6D4" />
+                        </svg>
+                    </div>
+                    
+                    <!-- Text -->
+                    <span class="font-wordmark font-bold text-3xl text-white tracking-tight">কই যাবেন</span>
+                    
+                    <!-- Loader -->
+                    <div class="absolute bottom-16 flex gap-2">
+                        <div class="w-2 h-2 rounded-full bg-cyan-500 animate-bounce"></div>
+                        <div class="w-2 h-2 rounded-full bg-cyan-500 animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 rounded-full bg-cyan-500 animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

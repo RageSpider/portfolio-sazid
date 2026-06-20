@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazidur Rahman | Technology & Systems</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- CDNFonts: Cabinet Grotesk & Satoshi -->
+    <link href="https://fonts.cdnfonts.com/css/cabinet-grotesk" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#e8e8e3',
+                        surface: '#dcdcd5',
+                        ink: '#1a1a1a',
+                    },
+                    fontFamily: {
+                        display: ['"Cabinet Grotesk"', 'sans-serif'],
+                        body: ['"Satoshi"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #e8e8e3;
+            color: #1a1a1a;
+            font-family: 'Satoshi', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        ::selection {
+            background-color: #1a1a1a;
+            color: #e8e8e3;
+        }
+
+        .noise-texture {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .clip-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+        .line-mask { overflow: hidden; display: block; }
+
+        .hover-underline { position: relative; cursor: pointer; text-decoration: none; }
+        .hover-underline::after {
+            content: ''; position: absolute; width: 100%; height: 1px;
+            bottom: -2px; left: 0; background-color: currentColor;
+            transform: scaleX(0); transform-origin: bottom right;
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        .hover-underline:hover::after {
+            transform: scaleX(1); transform-origin: bottom left;
+        }
+        
+        .editorial-border {
+            border-top: 1px solid rgba(26, 26, 26, 0.15);
+        }
+
+        /* Project row hover effect */
+        .project-row { transition: all 0.4s ease; cursor: pointer; }
+        .project-row:hover { background-color: rgba(26, 26, 26, 0.03); padding-left: 1rem; padding-right: 1rem; }
+        .project-arrow { opacity: 0; transform: translateX(-10px); transition: all 0.4s ease; }
+        .project-row:hover .project-arrow { opacity: 1; transform: translateX(0); }
+    </style>
+</head>
+<body>
+    <div class="noise-texture"></div>
+
+    <nav class="fixed top-0 w-full p-6 md:p-10 flex justify-between items-center z-40 mix-blend-multiply">
+        <a href="index.html" class="font-display font-bold text-xl tracking-wide uppercase hover:opacity-60 transition-opacity">SR</a>
+        
+        <div class="hidden md:flex gap-10 text-sm font-medium tracking-wide">
+            <a href="studio.html" class="hover-underline">The Studio</a>
+            <a href="ventures.html" class="hover-underline">Ventures</a>
+            <a href="technology.html" class="hover-underline border-b border-ink">Technology</a>
+            <a href="manifesto.html" class="hover-underline">Manifesto</a>
+        </div>
+        
+        <button class="md:hidden text-sm uppercase font-bold tracking-widest cursor-pointer">Menu</button>
+    </nav>
+
+    <main>
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-32 pb-16">
+            <div class="max-w-7xl mx-auto w-full relative">
+                
+                <div class="mb-6 md:mb-10 text-xs md:text-sm uppercase tracking-widest font-bold text-ink/50 gs-reveal">
+                    Chapter 03
+                </div>
+
+                <h1 class="font-display font-black text-[12vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ink uppercase -ml-2 mb-12">
+                    <div class="line-mask"><span class="block gs-title translate-y-[110%]">Technology</span></div>
+                </h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end">
+                    <div class="md:col-span-7 text-xl md:text-3xl font-medium leading-snug gs-reveal text-ink">
+                        Before cinema and games, the canvas was pure code. Engineering scalable web architectures and digital systems.
+                    </div>
+                    <div class="md:col-span-4 md:col-start-9 text-sm leading-relaxed gs-reveal text-ink/70">
+                        This is the technical foundation. While my focus has expanded into broader world-building, software engineering remains the structural backbone of everything I create.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-20 px-6 md:px-10 lg:px-20 bg-surface">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-16 editorial-border border-ink/20 pt-6 gs-fade">
+                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">The Arsenal</h2>
+                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Languages & Frameworks</span>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 gs-fade">
+                    
+                    <!-- Core -->
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-xs uppercase tracking-widest font-bold text-ink/50 border-b border-ink/10 pb-4 mb-2">Core</h3>
+                        <ul class="flex flex-col gap-2 font-medium text-lg">
+                            <li>HTML / CSS</li>
+                            <li>JavaScript</li>
+                            <li>JSON</li>
+                            <li>Python</li>
+                        </ul>
+                    </div>
+
+                    <!-- Creative -->
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-xs uppercase tracking-widest font-bold text-ink/50 border-b border-ink/10 pb-4 mb-2">Creative & Motion</h3>
+                        <ul class="flex flex-col gap-2 font-medium text-lg">
+                            <li>GSAP</li>
+                            <li>Three.js</li>
+                            <li>WebGL</li>
+                            <li>Lenis</li>
+                        </ul>
+                    </div>
+
+                    <!-- Frameworks -->
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-xs uppercase tracking-widest font-bold text-ink/50 border-b border-ink/10 pb-4 mb-2">Frameworks</h3>
+                        <ul class="flex flex-col gap-2 font-medium text-lg">
+                            <li>React</li>
+                            <li>Next.js</li>
+                            <li>Tailwind CSS</li>
+                            <li>Alpine.js</li>
+                        </ul>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="flex flex-col gap-4">
+                        <h3 class="text-xs uppercase tracking-widest font-bold text-ink/50 border-b border-ink/10 pb-4 mb-2">Backend & Data</h3>
+                        <ul class="flex flex-col gap-2 font-medium text-lg">
+                            <li>PostgreSQL</li>
+                            <li>Supabase</li>
+                            <li>MS Access</li>
+                            <li>ImageKit</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 px-6 md:px-10 lg:px-20">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-16 editorial-border pt-6 gs-fade">
+                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">The Archive</h2>
+                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Selected Works 24—25</span>
+                </div>
+
+                <div class="flex flex-col border-t border-ink/10">
+                    
+                    <!-- UCA -->
+                    <a href="http://unitedclubassociation.netlify.app/" target="_blank" class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 project-row gs-fade block">
+                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2025</div>
+                        <div class="md:col-span-4">
+                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">United Club Association</h3>
+                        </div>
+                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Platform Engineering</div>
+                        <div class="md:col-span-3 flex flex-wrap gap-2">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">GSAP</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Tailwind</span>
+                        </div>
+                        <div class="md:col-span-1 text-right hidden md:block">
+                            <svg class="w-6 h-6 inline-block project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                    </a>
+
+                    <!-- ULIC App -->
+                    <a href="https://ulicapp.vercel.app/" target="_blank" class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 project-row gs-fade block">
+                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2025</div>
+                        <div class="md:col-span-4">
+                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">ULIC Web App</h3>
+                        </div>
+                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Dynamic Web Application</div>
+                        <div class="md:col-span-3 flex flex-wrap gap-2">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Next.js</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Supabase</span>
+                        </div>
+                        <div class="md:col-span-1 text-right hidden md:block">
+                            <svg class="w-6 h-6 inline-block project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                    </a>
+
+                    <!-- ULIC Portal -->
+                    <a href="http://ulic.netlify.app/" target="_blank" class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 project-row gs-fade block">
+                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2024</div>
+                        <div class="md:col-span-4">
+                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">ULIC Portal</h3>
+                        </div>
+                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Community Architecture</div>
+                        <div class="md:col-span-3 flex flex-wrap gap-2">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">GSAP</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">HTML/CSS</span>
+                        </div>
+                        <div class="md:col-span-1 text-right hidden md:block">
+                            <svg class="w-6 h-6 inline-block project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                    </a>
+
+                    <!-- Frame of Revolution -->
+                    <a href="https://frbd.netlify.app/" target="_blank" class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 project-row gs-fade block">
+                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2024</div>
+                        <div class="md:col-span-4">
+                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">Frame of Revolution</h3>
+                        </div>
+                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Event Architecture & Auth</div>
+                        <div class="md:col-span-3 flex flex-wrap gap-2">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Supabase</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Backend</span>
+                        </div>
+                        <div class="md:col-span-1 text-right hidden md:block">
+                            <svg class="w-6 h-6 inline-block project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                    </a>
+
+                    <!-- Memory Series -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 gs-fade">
+                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2024</div>
+                        <div class="md:col-span-4">
+                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">Memory Series</h3>
+                        </div>
+                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Digital Archives</div>
+                        <div class="md:col-span-4 flex flex-wrap gap-2">
+                            <a href="https://ulabhsc26asec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer">Sec A</a>
+                            <a href="https://ulabhsc26bsec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer">Sec B</a>
+                            <a href="https://ulabhsc26hsec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer">Sec H</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-20 md:py-32 px-6 md:px-10 lg:px-20 border-t border-ink/10 bg-background">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+                <div>
+                    <h2 class="font-display text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-ink">Let's build<br>a world.</h2>
+                    <a href="mailto:hub9962@gmail.com" class="text-lg font-medium hover-underline inline-block cursor-pointer">hub9962@gmail.com</a>
+                </div>
+                
+                <div class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-ink/50 text-left md:text-right">
+                    <a href="https://github.com/ragespider" target="_blank" class="hover-underline cursor-pointer">Github</a>
+                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover-underline cursor-pointer">Facebook</a>
+                    <span class="mt-8">© 2026 Sazidur Rahman</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Smooth Scrolling setup
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Sequence
+        const tl = gsap.timeline();
+        
+        tl.to(".gs-title", {
+            y: 0,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power4.out",
+            delay: 0.2
+        })
+        .fromTo(".gs-reveal", {
+            opacity: 0,
+            y: 20
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power2.out"
+        }, "-=0.8");
+
+        // Scroll Fade for elements
+        gsap.utils.toArray('.gs-fade').forEach((elem) => {
+            gsap.fromTo(elem, 
+                { y: 30, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+    </script>
+</body>
+</html>

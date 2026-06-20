@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazidur Rahman | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,600,700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; background: #000; font-family: 'Clash Display', sans-serif; overflow: hidden; height: 100vh; }
+        
+        /* Desktop: Columns */
+        .wrapper { display: flex; width: 100%; height: 100%; }
+        .column {
+            flex: 1;
+            height: 100%;
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .column:last-child { border-right: none; }
+        
+        /* Hover Logic (Desktop Only) */
+        @media (min-width: 769px) {
+            .wrapper:hover .column { opacity: 0.3; }
+            .wrapper .column:hover { flex: 2; opacity: 1; }
+            .col-bg { transform: scale(1.1); transition: transform 1s; }
+            .column:hover .col-bg { transform: scale(1); }
+        }
+        
+        .col-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+        }
+
+        .content { position: absolute; bottom: 2rem; left: 2rem; z-index: 10; pointer-events: none; mix-blend-mode: difference; color: white; }
+
+        .role-title { font-size: 2rem; font-weight: 600; text-transform: uppercase; letter-spacing: -0.02em; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            body { overflow-y: auto; height: auto; }
+            .wrapper { flex-direction: column; display: block; }
+            .column { 
+                width: 100%; 
+                height: 33vh; 
+                min-height: 250px;
+                border-right: none; 
+                border-bottom: 1px solid rgba(255,255,255,0.1); 
+                display: flex;
+                align-items: flex-end;
+            }
+            .role-title { font-size: 1.5rem; }
+            .content { bottom: 1.5rem; left: 1.5rem; }
+        }
+
+        /* Gradients/Backgrounds */
+        .bg-eng { background: radial-gradient(circle at center, #1e3a8a, #000); }
+        .bg-fnd { background: radial-gradient(circle at center, #7c2d12, #000); }
+        .bg-cre { background: radial-gradient(circle at center, #701a75, #000); }
+
+        /* About Button */
+        .about-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            color: rgba(255,255,255,0.5);
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 999px;
+            transition: all 0.3s;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+        .about-btn:hover {
+            color: white;
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Engineer -->
+        <a href="engineer.html" class="column group">
+            <div class="col-bg bg-eng"></div>
+            <div class="content">
+                <div class="text-xs uppercase tracking-widest mb-2 opacity-50">01</div>
+                <h2 class="role-title">Engineer</h2>
+            </div>
+            <div class="absolute top-10 right-10 text-[8rem] lg:text-[10rem] font-bold text-white opacity-5 hidden md:block group-hover:opacity-20 transition-opacity">01</div>
+        </a>
+
+        <!-- Founder -->
+        <a href="founder.html" class="column group">
+            <div class="col-bg bg-fnd"></div>
+            <div class="content">
+                <div class="text-xs uppercase tracking-widest mb-2 opacity-50">02</div>
+                <h2 class="role-title">Founder</h2>
+            </div>
+            <div class="absolute top-10 right-10 text-[8rem] lg:text-[10rem] font-bold text-white opacity-5 hidden md:block group-hover:opacity-20 transition-opacity">02</div>
+        </a>
+
+        <!-- Creator -->
+        <a href="creator.html" class="column group">
+            <div class="col-bg bg-cre"></div>
+            <div class="content">
+                <div class="text-xs uppercase tracking-widest mb-2 opacity-50">03</div>
+                <h2 class="role-title">Creator</h2>
+            </div>
+            <div class="absolute top-10 right-10 text-[8rem] lg:text-[10rem] font-bold text-white opacity-5 hidden md:block group-hover:opacity-20 transition-opacity">03</div>
+        </a>
+    </div>
+
+    <!-- About Link on Home -->
+    <a href="about.html" class="about-btn">About The Architect</a>
+</body>
+</html>

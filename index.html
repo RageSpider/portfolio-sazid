@@ -3,126 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazidur Rahman | Portfolio</title>
+    <title>Sazidur Rahman | Creative Director & Founder</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,600,700&display=swap" rel="stylesheet">
-    <style>
-        body { margin: 0; background: #000; font-family: 'Clash Display', sans-serif; overflow: hidden; height: 100vh; }
-        
-        /* Desktop: Columns */
-        .wrapper { display: flex; width: 100%; height: 100%; }
-        .column {
-            flex: 1;
-            height: 100%;
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            border-right: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .column:last-child { border-right: none; }
-        
-        /* Hover Logic (Desktop Only) */
-        @media (min-width: 769px) {
-            .wrapper:hover .column { opacity: 0.3; }
-            .wrapper .column:hover { flex: 2; opacity: 1; }
-            .col-bg { transform: scale(1.1); transition: transform 1s; }
-            .column:hover .col-bg { transform: scale(1); }
-        }
-        
-        .col-bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.4;
-        }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
-        .content { position: absolute; bottom: 2rem; left: 2rem; z-index: 10; pointer-events: none; mix-blend-mode: difference; color: white; }
+    <!-- CDNFonts: Cabinet Grotesk (Display) & Satoshi (Body) -->
+    <link href="https://fonts.cdnfonts.com/css/cabinet-grotesk" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
 
-        .role-title { font-size: 2rem; font-weight: 600; text-transform: uppercase; letter-spacing: -0.02em; }
-
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            body { overflow-y: auto; height: auto; }
-            .wrapper { flex-direction: column; display: block; }
-            .column { 
-                width: 100%; 
-                height: 33vh; 
-                min-height: 250px;
-                border-right: none; 
-                border-bottom: 1px solid rgba(255,255,255,0.1); 
-                display: flex;
-                align-items: flex-end;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#e8e8e3', /* Soft stone - light but anti-blinding */
+                        surface: '#dcdcd5',    /* Slightly darker stone for cards/elements */
+                        ink: '#1a1a1a',        /* Charcoal off-black */
+                        accent: '#5a6258',     /* Muted sophisticated sage */
+                    },
+                    fontFamily: {
+                        display: ['"Cabinet Grotesk"', 'sans-serif'],
+                        body: ['"Satoshi"', 'sans-serif'],
+                    }
+                }
             }
-            .role-title { font-size: 1.5rem; }
-            .content { bottom: 1.5rem; left: 1.5rem; }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #e8e8e3;
+            color: #1a1a1a;
+            font-family: 'Satoshi', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            cursor: default;
         }
 
-        /* Gradients/Backgrounds */
-        .bg-eng { background: radial-gradient(circle at center, #1e3a8a, #000); }
-        .bg-fnd { background: radial-gradient(circle at center, #7c2d12, #000); }
-        .bg-cre { background: radial-gradient(circle at center, #701a75, #000); }
+        ::selection {
+            background-color: #1a1a1a;
+            color: #e8e8e3;
+        }
 
-        /* About Button */
-        .about-btn {
+        /* Subtle noise texture to make the background feel like physical material */
+        .noise-texture {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 100;
-            color: rgba(255,255,255,0.5);
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 16px;
-            border-radius: 999px;
-            transition: all 0.3s;
-            text-decoration: none;
-            backdrop-filter: blur(5px);
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
-        .about-btn:hover {
-            color: white;
-            border-color: white;
-            background: rgba(255,255,255,0.1);
+
+        /* Smooth reveal utilities for GSAP */
+        .clip-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         }
+        
+        .line-mask {
+            overflow: hidden;
+            display: block;
+        }
+
+        /* Hover animations for links */
+        .hover-underline {
+            position: relative;
+        }
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        .hover-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Image/Card Hover Scale */
+        .image-container { overflow: hidden; }
+        .image-container img { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .group:hover .image-container img { transform: scale(1.05); }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Engineer -->
-        <a href="engineer.html" class="column group">
-            <div class="col-bg bg-eng"></div>
-            <div class="content">
-                <div class="text-xs uppercase tracking-widest mb-2 opacity-50">01</div>
-                <h2 class="role-title">Engineer</h2>
-            </div>
-            <div class="absolute top-10 right-10 text-[8rem] lg:text-[10rem] font-bold text-white opacity-5 hidden md:block group-hover:opacity-20 transition-opacity">01</div>
-        </a>
+    <div class="noise-texture"></div>
 
-        <!-- Founder -->
-        <a href="founder.html" class="column group">
-            <div class="col-bg bg-fnd"></div>
-            <div class="content">
-                <div class="text-xs uppercase tracking-widest mb-2 opacity-50">02</div>
-                <h2 class="role-title">Founder</h2>
-            </div>
-            <div class="absolute top-10 right-10 text-[8rem] lg:text-[10rem] font-bold text-white opacity-5 hidden md:block group-hover:opacity-20 transition-opacity">02</div>
-        </a>
+    <nav class="fixed top-0 w-full p-6 md:p-10 flex justify-between items-center z-40 mix-blend-multiply">
+        <a href="index.html" class="font-display font-bold text-xl tracking-wide uppercase">SR</a>
+        
+        <div class="hidden md:flex gap-10 text-sm font-medium tracking-wide">
+            <a href="studio.html" class="hover-underline">The Studio</a>
+            <a href="ventures.html" class="hover-underline">Ventures</a>
+            <a href="technology.html" class="hover-underline">Technology</a>
+            <a href="manifesto.html" class="hover-underline">Manifesto</a>
+        </div>
+        
+        <button class="md:hidden text-sm uppercase font-bold tracking-widest">Menu</button>
+    </nav>
 
-        <!-- Creator -->
-        <a href="creator.html" class="column group">
-            <div class="col-bg bg-cre"></div>
-            <div class="content">
-                <div class="text-xs uppercase tracking-widest mb-2 opacity-50">03</div>
-                <h2 class="role-title">Creator</h2>
-            </div>
-            <div class="absolute top-10 right-10 text-[8rem] lg:text-[10rem] font-bold text-white opacity-5 hidden md:block group-hover:opacity-20 transition-opacity">03</div>
-        </a>
-    </div>
+    <main>
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-20">
+            
+            <div class="max-w-7xl mx-auto w-full relative">
+                <div class="mb-8 flex flex-wrap items-center gap-3 text-xs md:text-sm uppercase tracking-widest font-bold text-ink/70 gs-reveal">
+                    <span class="border border-ink/20 px-4 py-1.5 rounded-full">Creative Director</span>
+                    <span class="border border-ink/20 px-4 py-1.5 rounded-full">Founder</span>
+                </div>
 
-    <!-- About Link on Home -->
-    <a href="about.html" class="about-btn">About The Architect</a>
+                <!-- Name: The Main Attraction -->
+                <h1 class="font-display font-black text-[15vw] md:text-[12vw] leading-[0.8] tracking-tighter text-ink uppercase -ml-2">
+                    <div class="line-mask"><span class="block gs-title translate-y-[110%]">Sazidur</span></div>
+                    <div class="line-mask"><span class="block gs-title translate-y-[110%] md:indent-[10vw]">Rahman</span></div>
+                </h1>
+
+                <div class="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 items-end border-b border-ink/10 pb-12">
+                    <div class="md:col-span-5 text-sm md:text-base font-medium leading-relaxed max-w-sm gs-reveal text-ink/80">
+                        I'm an 18-year-old creative director and founder. I love bringing ideas to life, whether that's through storytelling, film, games, or the code that holds it all together. I'm just exploring what's possible when different mediums connect.
+                    </div>
+                    <div class="md:col-span-4 md:col-start-9 text-xs uppercase tracking-widest text-ink/60 font-bold gs-reveal">
+                        <div class="flex justify-between border-b border-ink/10 pb-3 mb-3">
+                            <span>Location</span>
+                            <span class="text-ink">Dhaka, Bangladesh</span>
+                        </div>
+                        <div class="flex justify-between border-b border-ink/10 pb-3">
+                            <span>Age</span>
+                            <span class="text-ink">18</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 px-6 md:px-10 lg:px-20">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
+                
+                <div class="md:col-span-4">
+                    <h2 class="font-display text-3xl md:text-4xl font-bold uppercase tracking-tight gs-fade">Shifting Focus</h2>
+                </div>
+                
+                <div class="md:col-span-8 text-lg md:text-2xl leading-relaxed font-medium text-ink/80 gs-fade">
+                    I started out deeply immersed in web development, building digital systems and focusing heavily on code. I still love engineering and haven't left it behind, but my interests have naturally expanded.
+                    <br><br>
+                    Today, I'm spending more time exploring the creative side of things: writing books, planning animations, and designing games. <span class="text-ink font-bold">Technology is still my foundation, but now it's just one of the many tools I use to tell stories.</span>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-20 px-6 md:px-10 lg:px-20 bg-surface">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-16 border-b border-ink/10 pb-6 gs-fade">
+                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">The Ecosystem</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+                    
+                    <!-- Link to Studio -->
+                    <a href="studio.html" class="group block gs-fade border border-ink/10 p-8 md:p-12 rounded-3xl hover:bg-ink hover:text-background transition-all duration-500">
+                        <div class="flex justify-between items-start mb-24 md:mb-32">
+                            <span class="text-xs uppercase tracking-widest font-bold border border-ink/20 group-hover:border-background/30 px-4 py-1.5 rounded-full transition-colors">01</span>
+                            <svg class="w-6 h-6 transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-4xl md:text-5xl font-bold uppercase tracking-tight mb-4">The Studio</h3>
+                            <p class="text-sm md:text-base opacity-70 max-w-sm">Animation, cinema, and interactive game design. Where stories take form.</p>
+                        </div>
+                    </a>
+
+                    <!-- Link to Ventures -->
+                    <a href="ventures.html" class="group block gs-fade border border-ink/10 p-8 md:p-12 rounded-3xl hover:bg-ink hover:text-background transition-all duration-500">
+                        <div class="flex justify-between items-start mb-24 md:mb-32">
+                            <span class="text-xs uppercase tracking-widest font-bold border border-ink/20 group-hover:border-background/30 px-4 py-1.5 rounded-full transition-colors">02</span>
+                            <svg class="w-6 h-6 transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-4xl md:text-5xl font-bold uppercase tracking-tight mb-4">Ventures</h3>
+                            <p class="text-sm md:text-base opacity-70 max-w-sm">EdTech, organizations, and technological initiatives. Building the infrastructure.</p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-32 px-6 md:px-10 lg:px-20">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+                <div>
+                    <h2 class="font-display text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 text-ink">Let's build<br>a world.</h2>
+                    <a href="mailto:hub9962@gmail.com" class="text-xl font-medium hover-underline inline-block">hub9962@gmail.com</a>
+                </div>
+                
+                <div class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-ink/50 text-left md:text-right">
+                    <a href="https://github.com/ragespider" target="_blank" class="hover:text-ink transition-colors">Github</a>
+                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover:text-ink transition-colors">Facebook</a>
+                    <span class="mt-8">© 2026 Sazidur Rahman</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Initialize Lenis for buttery smooth scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Sequence on Load
+        const tl = gsap.timeline();
+        
+        tl.to(".gs-title", {
+            y: 0,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power4.out",
+            delay: 0.2
+        })
+        .fromTo(".gs-reveal", {
+            opacity: 0,
+            y: 20
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power2.out"
+        }, "-=0.8");
+
+        // Scroll Animations for elements fading up as user scrolls
+        gsap.utils.toArray('.gs-fade').forEach((elem) => {
+            gsap.fromTo(elem, 
+                { y: 40, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%", // Triggers when the top of the element hits 85% of the viewport height
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+    </script>
 </body>
 </html>

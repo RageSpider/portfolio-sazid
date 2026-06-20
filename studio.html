@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazidur Rahman | The Studio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- CDNFonts: Cabinet Grotesk & Satoshi, Google Fonts: Hind Siliguri for Bangla -->
+    <link href="https://fonts.cdnfonts.com/css/cabinet-grotesk" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#e8e8e3',
+                        surface: '#dcdcd5',
+                        ink: '#1a1a1a',
+                    },
+                    fontFamily: {
+                        display: ['"Cabinet Grotesk"', 'sans-serif'],
+                        body: ['"Satoshi"', 'sans-serif'],
+                        bangla: ['"Hind Siliguri"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #e8e8e3;
+            color: #1a1a1a;
+            font-family: 'Satoshi', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            cursor: default; /* Enforcing default cursor globally */
+        }
+
+        ::selection {
+            background-color: #1a1a1a;
+            color: #e8e8e3;
+        }
+
+        .noise-texture {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .clip-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+        .line-mask { overflow: hidden; display: block; }
+
+        /* Navigation Hover */
+        .hover-underline { position: relative; cursor: pointer; }
+        .hover-underline::after {
+            content: ''; position: absolute; width: 100%; height: 1px;
+            bottom: -2px; left: 0; background-color: currentColor;
+            transform: scaleX(0); transform-origin: bottom right;
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        .hover-underline:hover::after {
+            transform: scaleX(1); transform-origin: bottom left;
+        }
+        
+        /* Editorial borders */
+        .editorial-border {
+            border-top: 1px solid rgba(26, 26, 26, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-texture"></div>
+
+    <nav class="fixed top-0 w-full p-6 md:p-10 flex justify-between items-center z-40 mix-blend-multiply">
+        <a href="index.html" class="font-display font-bold text-xl tracking-wide uppercase cursor-pointer">SR</a>
+        
+        <div class="hidden md:flex gap-10 text-sm font-medium tracking-wide">
+            <a href="studio.html" class="hover-underline border-b border-ink">The Studio</a>
+            <a href="ventures.html" class="hover-underline">Ventures</a>
+            <a href="technology.html" class="hover-underline">Technology</a>
+            <a href="manifesto.html" class="hover-underline">Manifesto</a>
+        </div>
+        
+        <button class="md:hidden text-sm uppercase font-bold tracking-widest cursor-pointer">Menu</button>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-32 pb-16">
+            <div class="max-w-7xl mx-auto w-full relative">
+                
+                <div class="mb-6 md:mb-10 text-xs md:text-sm uppercase tracking-widest font-bold text-ink/50 gs-reveal">
+                    Chapter 01
+                </div>
+
+                <h1 class="font-display font-black text-[12vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ink uppercase -ml-2 mb-12">
+                    <div class="line-mask"><span class="block gs-title translate-y-[110%]">The</span></div>
+                    <div class="line-mask"><span class="block gs-title translate-y-[110%] md:indent-[10vw]">Studio</span></div>
+                </h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end">
+                    <div class="md:col-span-6 text-xl md:text-3xl font-medium leading-snug gs-reveal text-ink">
+                        Animation, cinema, games, and sequential art. Where narratives take form and worlds are built.
+                    </div>
+                    <div class="md:col-span-4 md:col-start-9 text-sm leading-relaxed gs-reveal text-ink/70">
+                        This is the creative core. Unbound by medium, focused entirely on the execution of stories. Currently in the concept and drafting phases of interactive applications, games, and literature.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Gallery: Concepts -->
+        <section class="py-20 px-6 md:px-10 lg:px-20">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-16 editorial-border pt-6 gs-fade">
+                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">Interactive Concepts</h2>
+                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Digital & Tabletop</span>
+                </div>
+
+                <div class="flex flex-col gap-24">
+                    
+                    <!-- Concept: Shobdo -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 gs-fade">
+                        <div class="md:col-span-4 flex flex-col items-start">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full mb-6 text-ink/80">Concept Phase</span>
+                            
+                            <!-- App Icon Style Container for Logo -->
+                            <div class="w-32 h-32 md:w-48 md:h-48 rounded-[2rem] overflow-hidden border border-ink/10 shadow-2xl flex items-center justify-center bg-white p-1">
+                                <img src="images/shobdo_logo.png" 
+                                     onerror="this.onerror=null; this.src='shobdo_logo_2.jpg';" 
+                                     alt="Shobdo Logo" 
+                                     class="w-full h-full object-cover rounded-[1.75rem]">
+                            </div>
+                        </div>
+                        <div class="md:col-span-8">
+                            <h3 class="font-display text-4xl md:text-6xl font-bold tracking-tight mb-2">
+                                <span class="font-bangla">শব্দ</span> 
+                                <span class="text-ink/40 font-body text-2xl md:text-4xl font-normal tracking-normal align-middle ml-2">(Shobdo)</span>
+                            </h3>
+                            <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Linguistic Application</p>
+                            <p class="text-lg leading-relaxed text-ink/80 max-w-2xl">
+                                An educational application structured around the rich linguistic diversity of Bangladesh. Functioning similarly to language-learning platforms, it is designed to help users understand, translate, and preserve regional dialects.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Concept: Koi Series -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 gs-fade editorial-border pt-16">
+                        <div class="md:col-span-4">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full mb-6 inline-block text-ink/80">Concept Phase</span>
+                            <h3 class="font-display text-4xl md:text-6xl font-bold tracking-tight mb-2">
+                                <span class="font-bangla">কই সিরিজ</span> 
+                            </h3>
+                            <p class="text-ink/40 font-body text-lg md:text-xl mb-6">(Koi Series)</p>
+                            <p class="text-base leading-relaxed text-ink/80 pr-4">
+                                A multi-faceted digital ecosystem mapping modern exploration, dining, and commerce across Bangladesh.
+                            </p>
+                        </div>
+                        <div class="md:col-span-8">
+                            <!-- Koi Series Sub-parts -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 h-full mt-4 md:mt-0">
+                                <div class="bg-surface/50 border border-ink/10 p-6 rounded-2xl flex flex-col justify-between h-48 md:h-full">
+                                    <div>
+                                        <h4 class="font-bangla font-bold text-2xl mb-1">কই যাবেন</h4>
+                                        <p class="font-display text-sm text-ink/60 font-medium mb-4">Koi Jaben</p>
+                                    </div>
+                                    <p class="text-xs uppercase tracking-widest font-bold text-ink">Travel & Exploration</p>
+                                </div>
+                                <div class="bg-surface/50 border border-ink/10 p-6 rounded-2xl flex flex-col justify-between h-48 md:h-full">
+                                    <div>
+                                        <h4 class="font-bangla font-bold text-2xl mb-1">কই খাবেন</h4>
+                                        <p class="font-display text-sm text-ink/60 font-medium mb-4">Koi Khaben</p>
+                                    </div>
+                                    <p class="text-xs uppercase tracking-widest font-bold text-ink">Food & Dining</p>
+                                </div>
+                                <div class="bg-surface/50 border border-ink/10 p-6 rounded-2xl flex flex-col justify-between h-48 md:h-full">
+                                    <div>
+                                        <h4 class="font-bangla font-bold text-2xl mb-1">কি কিনবেন</h4>
+                                        <p class="font-display text-sm text-ink/60 font-medium mb-4">Ki Kinben</p>
+                                    </div>
+                                    <p class="text-xs uppercase tracking-widest font-bold text-ink">Commerce & Lifestyle</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Concept: She Ke -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 gs-fade editorial-border pt-16">
+                        <div class="md:col-span-4">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full mb-6 inline-block text-ink/80">Concept Phase</span>
+                        </div>
+                        <div class="md:col-span-8">
+                            <h3 class="font-display text-4xl md:text-6xl font-bold tracking-tight mb-2">
+                                <span class="font-bangla">সে কে?</span> 
+                                <span class="text-ink/40 font-body text-2xl md:text-4xl font-normal tracking-normal align-middle ml-2">(She Ke?)</span>
+                            </h3>
+                            <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Interactive Game Series</p>
+                            <p class="text-lg leading-relaxed text-ink/80 max-w-2xl">
+                                A Bengalified interactive 'Guess Who?' game series. Prototyping cultural playability, character design, and localized deductive reasoning mechanics.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Concept: TCG -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 gs-fade editorial-border pt-16">
+                        <div class="md:col-span-4">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full mb-6 inline-block text-ink/80">Concept Phase</span>
+                        </div>
+                        <div class="md:col-span-8">
+                            <h3 class="font-display text-4xl md:text-6xl font-bold tracking-tight mb-2">TCG System</h3>
+                            <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Tabletop Game Design</p>
+                            <p class="text-lg leading-relaxed text-ink/80 max-w-2xl">
+                                A custom Trading Card Game system. Currently in the early concept and rule-drafting phase, focusing on balanced mathematical mechanics and an extensive, original lore.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery: Manuscripts -->
+        <section class="py-20 px-6 md:px-10 lg:px-20 bg-surface">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-16 editorial-border border-ink/20 pt-6 gs-fade">
+                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">Manuscripts</h2>
+                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">In Progress</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    
+                    <!-- Book 1: Death 8 -->
+                    <div class="bg-background p-8 md:p-12 rounded-3xl border border-ink/5 gs-fade">
+                        <div class="flex justify-between items-start mb-12">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full text-ink/80">Drafting</span>
+                            <svg class="w-6 h-6 text-ink/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h3 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Death 8</h3>
+                        <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Novel Series • 8 Parts</p>
+                        <p class="text-base leading-relaxed text-ink/80">
+                            A psychological horror and sci-fi thriller series. The narrative centers around a lethal "Dream Server" (System V.9) where subjects must navigate a deadly neural map of 8 interconnected rooms—facing physics traps, logic puzzles, and profound psychological trauma to survive until dawn.
+                        </p>
+                    </div>
+
+                    <!-- Book 2: Oshomapto 101 -->
+                    <div class="bg-background p-8 md:p-12 rounded-3xl border border-ink/5 gs-fade">
+                        <div class="flex justify-between items-start mb-12">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full text-ink/80">Drafting</span>
+                            <svg class="w-6 h-6 text-ink/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h3 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                            <span class="font-bangla">অসমাপ্ত ১০১</span>
+                        </h3>
+                        <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Oshomapto 101 • Anthology</p>
+                        <p class="text-base leading-relaxed text-ink/80">
+                            A curated anthology compiling original thoughts. It is an exploration of mixed literary formats, weaving together unfinalized poems and short stories into a cohesive collection.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- The Horizon -->
+        <section class="py-32 px-6 md:px-10 lg:px-20">
+            <div class="max-w-7xl mx-auto text-center">
+                <div class="mb-12 gs-fade">
+                    <h2 class="font-display text-sm md:text-base font-bold uppercase tracking-widest text-ink/50 mb-4">The Horizon</h2>
+                    <p class="text-xl md:text-3xl font-medium leading-tight max-w-3xl mx-auto">Mediums currently being explored and plotted for future execution.</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 md:gap-6 gs-fade">
+                    <span class="px-6 py-3 border border-ink/20 rounded-full text-lg md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-transparent">Animation</span>
+                    <span class="px-6 py-3 border border-ink/20 rounded-full text-lg md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-transparent">Cinema</span>
+                    <span class="px-6 py-3 border border-ink/20 rounded-full text-lg md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-transparent">Comic Creation</span>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-20 md:py-32 px-6 md:px-10 lg:px-20 border-t border-ink/10">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+                <div>
+                    <h2 class="font-display text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-ink">Bring concepts<br>to life.</h2>
+                    <p class="text-sm font-medium text-ink/70 max-w-sm mb-8">Seeking investments and creative collaborations to turn these blueprints into actual products.</p>
+                    <a href="mailto:hub9962@gmail.com" class="text-lg font-medium hover-underline inline-block cursor-pointer">hub9962@gmail.com</a>
+                </div>
+                
+                <div class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-ink/50 text-left md:text-right">
+                    <a href="https://github.com/ragespider" target="_blank" class="hover-underline cursor-pointer">Github</a>
+                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover-underline cursor-pointer">Facebook</a>
+                    <span class="mt-8">© 2026 Sazidur Rahman</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Smooth Scrolling setup
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Sequence
+        const tl = gsap.timeline();
+        
+        tl.to(".gs-title", {
+            y: 0,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power4.out",
+            delay: 0.2
+        })
+        .fromTo(".gs-reveal", {
+            opacity: 0,
+            y: 20
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power2.out"
+        }, "-=0.8");
+
+        // Scroll Fade for all sections
+        gsap.utils.toArray('.gs-fade').forEach((elem) => {
+            gsap.fromTo(elem, 
+                { y: 30, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+    </script>
+</body>
+</html>

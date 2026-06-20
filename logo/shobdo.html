@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shobdo - Logo Exporter Studio</title>
+    
+    <!-- Tiro Bangla for the ancient/manuscript typography feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS for Studio UI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- html2canvas for robust image export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        /* Logo Core Variables */
+        :root {
+            --terracotta-light: #D4663D;
+            --terracotta-dark: #A03C1B;
+            --charcoal: #2B2B2B;
+            --clay-highlight: rgba(255, 190, 150, 0.4);
+            --clay-shadow: rgba(0, 0, 0, 0.7);
+        }
+
+        body {
+            background-color: #0f172a; /* Slate 900 */
+            color: #f8fafc;
+        }
+
+        /* THE LOGO COMPONENT
+           Designed to scale dynamically using percentages/em so it looks perfect
+           at 32px or 2000px when exported.
+        */
+        .logo-frame {
+            position: relative;
+            display: block; /* CHANGED: Removed flexbox to fix html2canvas rendering bug */
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Tiro Bangla', serif;
+        }
+
+        .variant-standard {
+            background: linear-gradient(135deg, var(--terracotta-light) 0%, var(--terracotta-dark) 100%);
+            border-radius: 22.5%; /* Apple squircle ratio */
+            box-shadow: 
+                0 10% 20% rgba(0, 0, 0, 0.4),
+                inset 1px 2px 4px var(--clay-highlight),
+                inset -2px -4px 8px rgba(80, 20, 5, 0.5);
+        }
+
+        .variant-transparent {
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .engraved-text {
+            position: absolute; /* ADDED: Explicit positioning */
+            top: 22%; /* ADDED: Replaces transform translation */
+            left: 0; /* ADDED */
+            width: 100%; /* ADDED */
+            text-align: center; /* ADDED */
+            color: var(--charcoal);
+            font-weight: bold;
+            line-height: 1;
+            /* Scalable text shadow for the carved clay effect */
+            text-shadow: 
+                -0.03em -0.03em 0.04em var(--clay-shadow),    
+                0.03em 0.03em 0.04em var(--clay-highlight); 
+            z-index: 10;
+            font-size: 0.35em; /* Scaled relative to container width */
+            /* CHANGED: Removed transform: translateY(-15%) as html2canvas fails to parse it */
+        }
+
+        /* The Tally-Mark Equalizer / Sound Waves */
+        .sound-wave-container {
+            position: absolute;
+            bottom: 22%;
+            left: 25%; /* ADDED: Center the 50% width container */
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4%;
+            width: 50%;
+            height: 15%;
+        }
+
+        .wave-bar {
+            width: 8%;
+            background-color: var(--charcoal);
+            border-radius: 100px;
+            /* Engraved effect for bars */
+            box-shadow: 
+                inset 0.05em 0.05em 0.05em var(--clay-shadow),
+                0.02em 0.02em 0.02em var(--clay-highlight);
+        }
+
+        /* Symmetrical equalizer heights */
+        .wave-bar:nth-child(1) { height: 30%; }
+        .wave-bar:nth-child(2) { height: 60%; }
+        .wave-bar:nth-child(3) { height: 100%; }
+        .wave-bar:nth-child(4) { height: 140%; transform: translateY(10%); } /* Center peak */
+        .wave-bar:nth-child(5) { height: 100%; }
+        .wave-bar:nth-child(6) { height: 60%; }
+        .wave-bar:nth-child(7) { height: 30%; }
+
+        /* Loader */
+        .loader {
+            border-top-color: #3b82f6;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/50 p-6">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-2xl font-bold">Shobdo Logo Studio</h1>
+            <p class="text-slate-400 text-sm mt-1">Terracotta Manuscript + Audio Equalizer Concept</p>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-grow flex flex-col lg:flex-row max-w-6xl mx-auto w-full p-6 gap-10">
+        
+        <!-- Left: Live Preview -->
+        <div class="flex-1 flex flex-col">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-4">Live Preview</h2>
+            <div class="bg-slate-800 rounded-2xl p-10 flex items-center justify-center flex-grow relative border border-slate-700 shadow-inner">
+                
+                <!-- The Actual Rendered Logo -->
+                <div id="preview-logo" class="logo-frame variant-standard" style="width: 256px; font-size: 256px;">
+                    <div class="engraved-text">শব্দ</div>
+                    <div class="sound-wave-container">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Variant Toggle -->
+            <div class="mt-6 flex gap-4">
+                <button onclick="toggleVariant('standard')" id="btn-standard" class="flex-1 py-3 px-4 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-500 transition border border-blue-500">
+                    Terracotta Tile
+                </button>
+                <button onclick="toggleVariant('transparent')" id="btn-transparent" class="flex-1 py-3 px-4 rounded-xl bg-slate-800 text-slate-300 font-medium hover:bg-slate-700 transition border border-slate-600">
+                    Transparent Mark
+                </button>
+            </div>
+        </div>
+
+        <!-- Right: Export Controls -->
+        <div class="w-full lg:w-96 flex flex-col gap-8">
+            
+            <!-- Sizes -->
+            <section>
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-4">Select Export Size</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="selectSize(2000)" id="size-2000" class="size-btn py-3 border border-slate-700 rounded-lg hover:border-blue-400 hover:text-blue-400 transition">
+                        <div class="font-bold">2000 x 2000</div>
+                        <div class="text-xs text-slate-500">High-Res Source</div>
+                    </button>
+                    <button onclick="selectSize(1024)" id="size-1024" class="size-btn py-3 border border-slate-700 rounded-lg hover:border-blue-400 hover:text-blue-400 transition">
+                        <div class="font-bold">1024 x 1024</div>
+                        <div class="text-xs text-slate-500">Standard HD</div>
+                    </button>
+                    <button onclick="selectSize(512)" id="size-512" class="size-btn py-3 border border-blue-500 bg-blue-900/20 text-blue-400 rounded-lg transition active-size">
+                        <div class="font-bold">512 x 512</div>
+                        <div class="text-xs text-slate-400">Play Store Icon</div>
+                    </button>
+                    <button onclick="selectSize(180)" id="size-180" class="size-btn py-3 border border-slate-700 rounded-lg hover:border-blue-400 hover:text-blue-400 transition">
+                        <div class="font-bold">180 x 180</div>
+                        <div class="text-xs text-slate-500">Apple Touch</div>
+                    </button>
+                    <button onclick="selectSize(60)" id="size-60" class="size-btn py-3 border border-slate-700 rounded-lg hover:border-blue-400 hover:text-blue-400 transition">
+                        <div class="font-bold">60 x 60</div>
+                        <div class="text-xs text-slate-500">Mobile Home</div>
+                    </button>
+                    <button onclick="selectSize(32)" id="size-32" class="size-btn py-3 border border-slate-700 rounded-lg hover:border-blue-400 hover:text-blue-400 transition">
+                        <div class="font-bold">32 x 32</div>
+                        <div class="text-xs text-slate-500">Favicon (Web)</div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Export Formats -->
+            <section>
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-4">Download Format</h2>
+                <div class="flex flex-col gap-3">
+                    <button onclick="generateImage('png')" class="w-full flex items-center justify-between p-4 bg-slate-800 hover:bg-slate-700 rounded-xl transition group border border-slate-700">
+                        <div class="text-left">
+                            <div class="font-bold text-white group-hover:text-blue-400 transition">Download PNG</div>
+                            <div class="text-xs text-slate-400">Best for general use & transparency.</div>
+                        </div>
+                        <svg class="w-6 h-6 text-slate-500 group-hover:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </button>
+                    
+                    <button onclick="generateImage('jpg')" class="w-full flex items-center justify-between p-4 bg-slate-800 hover:bg-slate-700 rounded-xl transition group border border-slate-700">
+                        <div class="text-left">
+                            <div class="font-bold text-white group-hover:text-blue-400 transition">Download JPG</div>
+                            <div class="text-xs text-slate-400">Smaller file size, no transparency.</div>
+                        </div>
+                        <svg class="w-6 h-6 text-slate-500 group-hover:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </button>
+                    
+                    <button onclick="generateSVG()" class="w-full flex items-center justify-between p-4 bg-slate-800 hover:bg-slate-700 rounded-xl transition group border border-slate-700">
+                        <div class="text-left">
+                            <div class="font-bold text-white group-hover:text-blue-400 transition">Download SVG</div>
+                            <div class="text-xs text-slate-400">Infinite scale vector format.</div>
+                        </div>
+                        <svg class="w-6 h-6 text-slate-500 group-hover:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Hidden Container for High-Res Rendering (Changed to Fixed to avoid layout offset bugs) -->
+    <div id="render-container" style="position: fixed; top: 0; left: 0; opacity: 0; pointer-events: none; z-index: -9999;"></div>
+
+    <!-- Processing Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center hidden">
+        <div class="loader ease-linear rounded-full border-4 border-t-4 border-slate-600 h-16 w-16 mb-4"></div>
+        <h2 class="text-xl font-semibold text-white">Generating high-res logo...</h2>
+        <p class="text-slate-400 mt-2 text-sm">This might take a second for larger sizes.</p>
+    </div>
+
+    <!-- Generator Logic -->
+    <script>
+        let currentSize = 512;
+        let currentVariant = 'standard';
+
+        function selectSize(size) {
+            currentSize = size;
+            // Update UI buttons
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'bg-blue-900/20', 'text-blue-400');
+                btn.classList.add('border-slate-700');
+            });
+            const activeBtn = document.getElementById(`size-${size}`);
+            activeBtn.classList.remove('border-slate-700');
+            activeBtn.classList.add('border-blue-500', 'bg-blue-900/20', 'text-blue-400');
+        }
+
+        function toggleVariant(variant) {
+            currentVariant = variant;
+            const logo = document.getElementById('preview-logo');
+            
+            // Update Preview
+            if(variant === 'transparent') {
+                logo.classList.replace('variant-standard', 'variant-transparent');
+                document.getElementById('btn-transparent').classList.replace('bg-slate-800', 'bg-blue-600');
+                document.getElementById('btn-transparent').classList.replace('border-slate-600', 'border-blue-500');
+                document.getElementById('btn-transparent').classList.replace('text-slate-300', 'text-white');
+                
+                document.getElementById('btn-standard').classList.replace('bg-blue-600', 'bg-slate-800');
+                document.getElementById('btn-standard').classList.replace('border-blue-500', 'border-slate-600');
+            } else {
+                logo.classList.replace('variant-transparent', 'variant-standard');
+                document.getElementById('btn-standard').classList.replace('bg-slate-800', 'bg-blue-600');
+                document.getElementById('btn-standard').classList.replace('border-slate-600', 'border-blue-500');
+                
+                document.getElementById('btn-transparent').classList.replace('bg-blue-600', 'bg-slate-800');
+                document.getElementById('btn-transparent').classList.replace('border-blue-500', 'border-slate-600');
+                document.getElementById('btn-transparent').classList.replace('text-white', 'text-slate-300');
+            }
+        }
+
+        async function generateImage(format) {
+            const overlay = document.getElementById('overlay');
+            const renderContainer = document.getElementById('render-container');
+            const previewLogo = document.getElementById('preview-logo');
+            
+            overlay.classList.remove('hidden');
+
+            // Allow UI to update to show loader and ensure fonts are ready
+            await document.fonts.ready; 
+            await new Promise(resolve => setTimeout(resolve, 150));
+
+            try {
+                // 1. Clone the logo exactly as it is for the off-screen render
+                const clone = previewLogo.cloneNode(true);
+                clone.id = 'render-clone';
+                
+                // 2. Scale the clone using inline styles to the target pixel size
+                // We use font-size to scale the em-based shadow and text metrics perfectly
+                clone.style.width = `${currentSize}px`;
+                clone.style.height = `${currentSize}px`;
+                clone.style.fontSize = `${currentSize}px`; 
+                
+                // Remove rounded corners if rendering transparent, or ensure they exist for standard
+                if (currentVariant === 'transparent') {
+                    clone.style.background = 'transparent';
+                }
+
+                // Ensure the background is completely transparent for PNGs if needed
+                renderContainer.appendChild(clone);
+
+                // 3. Generate Canvas using html2canvas
+                const canvas = await html2canvas(clone, {
+                    scale: 1, // We've already scaled the element itself
+                    backgroundColor: (format === 'png' || currentVariant === 'transparent') ? null : '#0f172a',
+                    logging: false,
+                    useCORS: true // Important for Google Fonts
+                });
+
+                // 4. Trigger Download
+                const mimeType = format === 'jpg' ? 'image/jpeg' : 'image/png';
+                const dataUrl = canvas.toDataURL(mimeType, format === 'jpg' ? 0.95 : 1.0);
+                
+                // Determine file extension (if 32x32 we name it favicon)
+                let ext = format;
+                let prefix = "shobdo-logo";
+                if(currentSize === 32 && format === 'png') prefix = "favicon";
+                
+                downloadFile(dataUrl, `${prefix}-${currentVariant}-${currentSize}px.${ext}`);
+
+            } catch (error) {
+                console.error("Rendering failed:", error);
+                alert("Failed to generate image. Please try a smaller size.");
+            } finally {
+                renderContainer.innerHTML = ''; // Cleanup
+                overlay.classList.add('hidden');
+            }
+        }
+
+        function generateSVG() {
+            // Generating a perfect standalone SVG from pure HTML/CSS is tricky.
+            // We provide a pre-constructed SVG string that matches the CSS design perfectly.
+            const isTransparent = currentVariant === 'transparent';
+            const bgRect = isTransparent 
+                ? '' 
+                : `<rect width="${currentSize}" height="${currentSize}" rx="${currentSize * 0.225}" ry="${currentSize * 0.225}" fill="url(#terracottaGrad)"/>`;
+            
+            // Recreating the text-shadow and box-shadow using SVG filters
+            const svgString = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${currentSize} ${currentSize}" width="${currentSize}" height="${currentSize}">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&amp;display=swap');
+            .text { font-family: 'Tiro Bangla', serif; font-weight: bold; font-size: ${currentSize * 0.35}px; fill: #2B2B2B; dominant-baseline: middle; text-anchor: middle; filter: url(#engrave); }
+            .bar { fill: #2B2B2B; filter: url(#engrave); rx: ${currentSize * 0.04}; ry: ${currentSize * 0.04}; }
+        </style>
+        <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#D4663D" />
+            <stop offset="100%" stop-color="#A03C1B" />
+        </linearGradient>
+        <filter id="engrave" x="-20%" y="-20%" width="140%" height="140%">
+            <feOffset dx="${-currentSize * 0.01}" dy="${-currentSize * 0.01}" in="SourceAlpha" result="shadow"/>
+            <feFlood flood-color="rgba(0,0,0,0.7)"/>
+            <feComposite operator="in" in2="shadow" result="innerShadow"/>
+            
+            <feOffset dx="${currentSize * 0.01}" dy="${currentSize * 0.01}" in="SourceAlpha" result="highlight"/>
+            <feFlood flood-color="rgba(255,190,150,0.4)"/>
+            <feComposite operator="in" in2="highlight" result="innerHighlight"/>
+            
+            <feMerge>
+                <feMergeNode in="innerShadow"/>
+                <feMergeNode in="innerHighlight"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    ${bgRect}
+    
+    <!-- Text -->
+    <text x="50%" y="42%" class="text">শব্দ</text>
+    
+    <!-- Equalizer / Tally Marks -->
+    <g transform="translate(${currentSize * 0.25}, ${currentSize * 0.7})">
+        <rect class="bar" x="0%" y="35%" width="8%" height="30%"/>
+        <rect class="bar" x="15.3%" y="20%" width="8%" height="60%"/>
+        <rect class="bar" x="30.6%" y="0%" width="8%" height="100%"/>
+        <rect class="bar" x="46%" y="-20%" width="8%" height="140%"/>
+        <rect class="bar" x="61.3%" y="0%" width="8%" height="100%"/>
+        <rect class="bar" x="76.6%" y="20%" width="8%" height="60%"/>
+        <rect class="bar" x="92%" y="35%" width="8%" height="30%"/>
+    </g>
+</svg>
+            `.trim();
+
+            const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            downloadFile(url, `shobdo-logo-${currentVariant}-${currentSize}px.svg`);
+            setTimeout(() => URL.revokeObjectURL(url), 100);
+        }
+
+        function downloadFile(dataUrl, filename) {
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
