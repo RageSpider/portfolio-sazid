@@ -43,7 +43,7 @@
             font-family: 'Satoshi', sans-serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            cursor: default; /* Enforcing default cursor globally */
+            cursor: default;
         }
 
         ::selection {
@@ -63,7 +63,6 @@
         .clip-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
         .line-mask { overflow: hidden; display: block; }
 
-        /* Navigation Hover */
         .hover-underline { position: relative; cursor: pointer; }
         .hover-underline::after {
             content: ''; position: absolute; width: 100%; height: 1px;
@@ -75,7 +74,6 @@
             transform: scaleX(1); transform-origin: bottom left;
         }
         
-        /* Editorial borders */
         .editorial-border {
             border-top: 1px solid rgba(26, 26, 26, 0.15);
         }
@@ -94,28 +92,50 @@
             <a href="manifesto.html" class="hover-underline">Manifesto</a>
         </div>
         
-        <button class="md:hidden text-sm uppercase font-bold tracking-widest cursor-pointer">Menu</button>
+        <!-- Added id for JS trigger -->
+        <button id="open-menu" class="md:hidden text-sm uppercase font-bold tracking-widest cursor-pointer p-2 -mr-2">Menu</button>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-ink z-[100] flex flex-col justify-between px-8 pt-24 pb-12 translate-y-[-100%] transition-transform duration-500 ease-[cubic-bezier(0.86,0,0.07,1)] md:hidden">
+        <button id="close-menu" class="absolute top-6 right-6 text-sm uppercase font-bold tracking-widest text-background p-2">Close</button>
+        
+        <div class="flex flex-col gap-6 text-4xl font-display uppercase font-bold tracking-tighter">
+            <a href="index.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Home</a>
+            <a href="studio.html" class="mobile-link block border-b border-background/10 pb-4 text-background">The Studio</a>
+            <a href="ventures.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Ventures</a>
+            <a href="technology.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Technology</a>
+            <a href="manifesto.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Manifesto</a>
+        </div>
+
+        <div class="text-xs uppercase tracking-widest font-bold text-background/50">
+            <span>© 2026 Sazidur Rahman</span>
+        </div>
+    </div>
+
     <main>
-        <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-32 pb-16">
+        <!-- Fixed Task 4: Reduced mobile height to min-h-[75vh] to close huge gap -->
+        <section class="min-h-[75vh] md:min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-32 md:pt-32 pb-8 md:pb-16">
             <div class="max-w-7xl mx-auto w-full relative">
                 
                 <div class="mb-6 md:mb-10 text-xs md:text-sm uppercase tracking-widest font-bold text-ink/50 gs-reveal">
                     Chapter 01
                 </div>
 
-                <h1 class="font-display font-black text-[12vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ink uppercase -ml-2 mb-12">
+                <!-- Fixed Task 1: Indentation for 'Studio' on mobile -->
+                <h1 class="font-display font-black text-[12vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ink uppercase -ml-2 mb-10 md:mb-12">
                     <div class="line-mask"><span class="block gs-title translate-y-[110%]">The</span></div>
-                    <div class="line-mask"><span class="block gs-title translate-y-[110%] md:indent-[10vw]">Studio</span></div>
+                    <div class="line-mask"><span class="block gs-title translate-y-[110%] indent-[12vw] md:indent-[10vw]">Studio</span></div>
                 </h1>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end">
-                    <div class="md:col-span-6 text-xl md:text-3xl font-medium leading-snug gs-reveal text-ink">
+                <!-- Fixed Task 2: Description text restructured for mobile into a card-style layout -->
+                <div class="flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-12 md:items-end">
+                    <div class="md:col-span-6 text-lg md:text-3xl font-medium leading-snug gs-reveal text-ink order-1">
                         Animation, cinema, games, and sequential art. Where narratives take form and worlds are built.
                     </div>
-                    <div class="md:col-span-4 md:col-start-9 text-sm leading-relaxed gs-reveal text-ink/70">
+                    
+                    <!-- Mobile Card Wrap for the secondary text, returns to flat on PC -->
+                    <div class="md:col-span-4 md:col-start-9 text-xs md:text-sm leading-relaxed gs-reveal text-ink/70 order-2 bg-surface/60 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none border border-ink/5 md:border-none shadow-sm md:shadow-none">
                         This is the creative core. Unbound by medium, focused entirely on the execution of stories. Currently in the concept and drafting phases of interactive applications, games, and literature.
                     </div>
                 </div>
@@ -123,107 +143,104 @@
             </div>
         </section>
 
-        <!-- Gallery: Concepts -->
-        <section class="py-20 px-6 md:px-10 lg:px-20">
+        <!-- Fixed Task 4: Reduced top padding py-20 to pt-12 pb-20 on mobile -->
+        <section class="pt-12 pb-20 md:py-20 px-6 md:px-10 lg:px-20">
             <div class="max-w-7xl mx-auto">
-                <div class="flex justify-between items-end mb-16 editorial-border pt-6 gs-fade">
-                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">Interactive Concepts</h2>
-                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Digital & Tabletop</span>
+                <div class="flex justify-between items-end mb-10 md:mb-16 editorial-border pt-6 gs-fade">
+                    <h2 class="font-display text-2xl md:text-4xl font-bold uppercase tracking-tight">Interactive Concepts</h2>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Digital & Tabletop</span>
                 </div>
 
-                <div class="flex flex-col gap-24">
+                <!-- Fixed Task 5: Adjusted gaps and added mobile card wrappers (bg-surface/40) to make it look non-basic -->
+                <div class="flex flex-col gap-10 md:gap-24">
                     
                     <!-- Concept: Shobdo -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 gs-fade">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 gs-fade bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-3xl md:rounded-none border border-ink/5 md:border-none">
                         <div class="md:col-span-4 flex flex-col items-start">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full mb-6 text-ink/80">Concept Phase</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 bg-background/50 md:bg-transparent px-3 py-1 rounded-full mb-6 text-ink/80">Concept Phase</span>
                             
-                            <!-- App Icon Style Container for Logo -->
-                            <div class="w-32 h-32 md:w-48 md:h-48 rounded-[2rem] overflow-hidden border border-ink/10 shadow-2xl flex items-center justify-center bg-white p-1">
-                                <img src="images/shobdo_logo.png" 
-                                     onerror="this.onerror=null; this.src='shobdo_logo_2.jpg';" 
-                                     alt="Shobdo Logo" 
-                                     class="w-full h-full object-cover rounded-[1.75rem]">
+                            <div class="w-24 h-24 md:w-48 md:h-48 rounded-2xl md:rounded-[2rem] overflow-hidden border border-ink/10 shadow-xl md:shadow-2xl flex items-center justify-center bg-white p-1">
+                                <img src="images/shobdo_logo.png" onerror="this.onerror=null; this.src='https://placehold.co/400x400/e8e8e3/1a1a1a?text=Shobdo';" alt="Shobdo Logo" class="w-full h-full object-cover rounded-xl md:rounded-[1.75rem]">
                             </div>
                         </div>
-                        <div class="md:col-span-8">
-                            <h3 class="font-display text-4xl md:text-6xl font-bold tracking-tight mb-2">
+                        <div class="md:col-span-8 mt-2 md:mt-0">
+                            <h3 class="font-display text-3xl md:text-6xl font-bold tracking-tight mb-2">
                                 <span class="font-bangla">শব্দ</span> 
-                                <span class="text-ink/40 font-body text-2xl md:text-4xl font-normal tracking-normal align-middle ml-2">(Shobdo)</span>
+                                <span class="text-ink/40 font-body text-xl md:text-4xl font-normal tracking-normal align-middle ml-2">(Shobdo)</span>
                             </h3>
-                            <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Linguistic Application</p>
-                            <p class="text-lg leading-relaxed text-ink/80 max-w-2xl">
+                            <p class="text-xs md:text-sm uppercase tracking-widest font-bold text-ink/60 mb-4 md:mb-6">Linguistic Application</p>
+                            <p class="text-sm md:text-lg leading-relaxed text-ink/80 max-w-2xl">
                                 An educational application structured around the rich linguistic diversity of Bangladesh. Functioning similarly to language-learning platforms, it is designed to help users understand, translate, and preserve regional dialects.
                             </p>
                         </div>
                     </div>
 
                     <!-- Concept: Koi Series -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 gs-fade editorial-border pt-16">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 gs-fade md:editorial-border md:pt-16 bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-3xl md:rounded-none border border-ink/5 md:border-none">
                         <div class="md:col-span-4">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full mb-6 inline-block text-ink/80">Concept Phase</span>
-                            <h3 class="font-display text-4xl md:text-6xl font-bold tracking-tight mb-2">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 bg-background/50 md:bg-transparent px-3 py-1 rounded-full mb-6 inline-block text-ink/80">Concept Phase</span>
+                            <h3 class="font-display text-3xl md:text-6xl font-bold tracking-tight mb-2">
                                 <span class="font-bangla">কই সিরিজ</span> 
                             </h3>
-                            <p class="text-ink/40 font-body text-lg md:text-xl mb-6">(Koi Series)</p>
-                            <p class="text-base leading-relaxed text-ink/80 pr-4">
+                            <p class="text-ink/40 font-body text-base md:text-xl mb-4 md:mb-6">(Koi Series)</p>
+                            <p class="text-sm md:text-base leading-relaxed text-ink/80 pr-4">
                                 A multi-faceted digital ecosystem mapping modern exploration, dining, and commerce across Bangladesh.
                             </p>
                         </div>
                         <div class="md:col-span-8">
-                            <!-- Koi Series Sub-parts -->
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 h-full mt-4 md:mt-0">
-                                <div class="bg-surface/50 border border-ink/10 p-6 rounded-2xl flex flex-col justify-between h-48 md:h-full">
+                            <!-- Mobile layout optimization for sub-cards -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 h-full mt-6 md:mt-0">
+                                <div class="bg-background/80 md:bg-surface/50 border border-ink/10 p-5 md:p-6 rounded-2xl flex flex-col justify-between h-auto md:h-full min-h-[140px] md:min-h-0">
                                     <div>
-                                        <h4 class="font-bangla font-bold text-2xl mb-1">কই যাবেন</h4>
-                                        <p class="font-display text-sm text-ink/60 font-medium mb-4">Koi Jaben</p>
+                                        <h4 class="font-bangla font-bold text-xl md:text-2xl mb-1">কই যাবেন</h4>
+                                        <p class="font-display text-xs md:text-sm text-ink/60 font-medium mb-4">Koi Jaben</p>
                                     </div>
-                                    <p class="text-xs uppercase tracking-widest font-bold text-ink">Travel & Exploration</p>
+                                    <p class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink">Travel & Exploration</p>
                                 </div>
-                                <div class="bg-surface/50 border border-ink/10 p-6 rounded-2xl flex flex-col justify-between h-48 md:h-full">
+                                <div class="bg-background/80 md:bg-surface/50 border border-ink/10 p-5 md:p-6 rounded-2xl flex flex-col justify-between h-auto md:h-full min-h-[140px] md:min-h-0">
                                     <div>
-                                        <h4 class="font-bangla font-bold text-2xl mb-1">কই খাবেন</h4>
-                                        <p class="font-display text-sm text-ink/60 font-medium mb-4">Koi Khaben</p>
+                                        <h4 class="font-bangla font-bold text-xl md:text-2xl mb-1">কই খাবেন</h4>
+                                        <p class="font-display text-xs md:text-sm text-ink/60 font-medium mb-4">Koi Khaben</p>
                                     </div>
-                                    <p class="text-xs uppercase tracking-widest font-bold text-ink">Food & Dining</p>
+                                    <p class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink">Food & Dining</p>
                                 </div>
-                                <div class="bg-surface/50 border border-ink/10 p-6 rounded-2xl flex flex-col justify-between h-48 md:h-full">
+                                <div class="bg-background/80 md:bg-surface/50 border border-ink/10 p-5 md:p-6 rounded-2xl flex flex-col justify-between h-auto md:h-full min-h-[140px] md:min-h-0">
                                     <div>
-                                        <h4 class="font-bangla font-bold text-2xl mb-1">কি কিনবেন</h4>
-                                        <p class="font-display text-sm text-ink/60 font-medium mb-4">Ki Kinben</p>
+                                        <h4 class="font-bangla font-bold text-xl md:text-2xl mb-1">কি কিনবেন</h4>
+                                        <p class="font-display text-xs md:text-sm text-ink/60 font-medium mb-4">Ki Kinben</p>
                                     </div>
-                                    <p class="text-xs uppercase tracking-widest font-bold text-ink">Commerce & Lifestyle</p>
+                                    <p class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink">Commerce & Lifestyle</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Concept: She Ke -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 gs-fade editorial-border pt-16">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 gs-fade md:editorial-border md:pt-16 bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-3xl md:rounded-none border border-ink/5 md:border-none">
                         <div class="md:col-span-4">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full mb-6 inline-block text-ink/80">Concept Phase</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 bg-background/50 md:bg-transparent px-3 py-1 rounded-full mb-4 md:mb-6 inline-block text-ink/80">Concept Phase</span>
                         </div>
                         <div class="md:col-span-8">
-                            <h3 class="font-display text-4xl md:text-6xl font-bold tracking-tight mb-2">
+                            <h3 class="font-display text-3xl md:text-6xl font-bold tracking-tight mb-2">
                                 <span class="font-bangla">সে কে?</span> 
-                                <span class="text-ink/40 font-body text-2xl md:text-4xl font-normal tracking-normal align-middle ml-2">(She Ke?)</span>
+                                <span class="text-ink/40 font-body text-xl md:text-4xl font-normal tracking-normal align-middle ml-2">(She Ke?)</span>
                             </h3>
-                            <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Interactive Game Series</p>
-                            <p class="text-lg leading-relaxed text-ink/80 max-w-2xl">
+                            <p class="text-xs md:text-sm uppercase tracking-widest font-bold text-ink/60 mb-4 md:mb-6">Interactive Game Series</p>
+                            <p class="text-sm md:text-lg leading-relaxed text-ink/80 max-w-2xl">
                                 A Bengalified interactive 'Guess Who?' game series. Prototyping cultural playability, character design, and localized deductive reasoning mechanics.
                             </p>
                         </div>
                     </div>
 
                     <!-- Concept: TCG -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 gs-fade editorial-border pt-16">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 gs-fade md:editorial-border md:pt-16 bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-3xl md:rounded-none border border-ink/5 md:border-none">
                         <div class="md:col-span-4">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full mb-6 inline-block text-ink/80">Concept Phase</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 bg-background/50 md:bg-transparent px-3 py-1 rounded-full mb-4 md:mb-6 inline-block text-ink/80">Concept Phase</span>
                         </div>
                         <div class="md:col-span-8">
-                            <h3 class="font-display text-4xl md:text-6xl font-bold tracking-tight mb-2">TCG System</h3>
-                            <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Tabletop Game Design</p>
-                            <p class="text-lg leading-relaxed text-ink/80 max-w-2xl">
+                            <h3 class="font-display text-3xl md:text-6xl font-bold tracking-tight mb-2">TCG System</h3>
+                            <p class="text-xs md:text-sm uppercase tracking-widest font-bold text-ink/60 mb-4 md:mb-6">Tabletop Game Design</p>
+                            <p class="text-sm md:text-lg leading-relaxed text-ink/80 max-w-2xl">
                                 A custom Trading Card Game system. Currently in the early concept and rule-drafting phase, focusing on balanced mathematical mechanics and an extensive, original lore.
                             </p>
                         </div>
@@ -234,39 +251,40 @@
         </section>
 
         <!-- Gallery: Manuscripts -->
-        <section class="py-20 px-6 md:px-10 lg:px-20 bg-surface">
+        <section class="py-16 md:py-20 px-6 md:px-10 lg:px-20 bg-surface">
             <div class="max-w-7xl mx-auto">
-                <div class="flex justify-between items-end mb-16 editorial-border border-ink/20 pt-6 gs-fade">
-                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">Manuscripts</h2>
-                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">In Progress</span>
+                <div class="flex justify-between items-end mb-10 md:mb-16 md:editorial-border md:border-ink/20 md:pt-6 gs-fade border-t border-ink/10 pt-4">
+                    <h2 class="font-display text-2xl md:text-4xl font-bold uppercase tracking-tight">Manuscripts</h2>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/50 text-right">In Progress</span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Fixed Task 5: Adjusted gaps and padding on mobile -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
                     
                     <!-- Book 1: Death 8 -->
-                    <div class="bg-background p-8 md:p-12 rounded-3xl border border-ink/5 gs-fade">
-                        <div class="flex justify-between items-start mb-12">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full text-ink/80">Drafting</span>
-                            <svg class="w-6 h-6 text-ink/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <div class="bg-background p-6 md:p-12 rounded-[1.5rem] md:rounded-3xl border border-ink/5 gs-fade shadow-sm md:shadow-none">
+                        <div class="flex justify-between items-start mb-8 md:mb-12">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 bg-surface/30 md:bg-transparent px-3 py-1 rounded-full text-ink/80">Drafting</span>
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-ink/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                         </div>
-                        <h3 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Death 8</h3>
-                        <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Novel Series • 8 Parts</p>
-                        <p class="text-base leading-relaxed text-ink/80">
+                        <h3 class="font-display text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">Death 8</h3>
+                        <p class="text-[10px] md:text-sm uppercase tracking-widest font-bold text-ink/60 mb-4 md:mb-6">Novel Series • 8 Parts</p>
+                        <p class="text-sm md:text-base leading-relaxed text-ink/80">
                             A psychological horror and sci-fi thriller series. The narrative centers around a lethal "Dream Server" (System V.9) where subjects must navigate a deadly neural map of 8 interconnected rooms—facing physics traps, logic puzzles, and profound psychological trauma to survive until dawn.
                         </p>
                     </div>
 
                     <!-- Book 2: Oshomapto 101 -->
-                    <div class="bg-background p-8 md:p-12 rounded-3xl border border-ink/5 gs-fade">
-                        <div class="flex justify-between items-start mb-12">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full text-ink/80">Drafting</span>
-                            <svg class="w-6 h-6 text-ink/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <div class="bg-background p-6 md:p-12 rounded-[1.5rem] md:rounded-3xl border border-ink/5 gs-fade shadow-sm md:shadow-none">
+                        <div class="flex justify-between items-start mb-8 md:mb-12">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 bg-surface/30 md:bg-transparent px-3 py-1 rounded-full text-ink/80">Drafting</span>
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-ink/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                         </div>
-                        <h3 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                        <h3 class="font-display text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">
                             <span class="font-bangla">অসমাপ্ত ১০১</span>
                         </h3>
-                        <p class="text-sm uppercase tracking-widest font-bold text-ink/60 mb-6">Oshomapto 101 • Anthology</p>
-                        <p class="text-base leading-relaxed text-ink/80">
+                        <p class="text-[10px] md:text-sm uppercase tracking-widest font-bold text-ink/60 mb-4 md:mb-6">Oshomapto 101 • Anthology</p>
+                        <p class="text-sm md:text-base leading-relaxed text-ink/80">
                             A curated anthology compiling original thoughts. It is an exploration of mixed literary formats, weaving together unfinalized poems and short stories into a cohesive collection.
                         </p>
                     </div>
@@ -276,34 +294,43 @@
         </section>
 
         <!-- The Horizon -->
-        <section class="py-32 px-6 md:px-10 lg:px-20">
+        <!-- Fixed Task 5: Decreased mobile padding, updated pill sizing -->
+        <section class="py-16 md:py-32 px-6 md:px-10 lg:px-20">
             <div class="max-w-7xl mx-auto text-center">
-                <div class="mb-12 gs-fade">
-                    <h2 class="font-display text-sm md:text-base font-bold uppercase tracking-widest text-ink/50 mb-4">The Horizon</h2>
-                    <p class="text-xl md:text-3xl font-medium leading-tight max-w-3xl mx-auto">Mediums currently being explored and plotted for future execution.</p>
+                <div class="mb-10 md:mb-12 gs-fade">
+                    <h2 class="font-display text-xs md:text-sm font-bold uppercase tracking-widest text-ink/50 mb-3 md:mb-4">The Horizon</h2>
+                    <p class="text-lg md:text-3xl font-medium leading-snug md:leading-tight max-w-3xl mx-auto px-4 md:px-0">Mediums currently being explored and plotted for future execution.</p>
                 </div>
 
-                <div class="flex flex-wrap justify-center gap-4 md:gap-6 gs-fade">
-                    <span class="px-6 py-3 border border-ink/20 rounded-full text-lg md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-transparent">Animation</span>
-                    <span class="px-6 py-3 border border-ink/20 rounded-full text-lg md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-transparent">Cinema</span>
-                    <span class="px-6 py-3 border border-ink/20 rounded-full text-lg md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-transparent">Comic Creation</span>
+                <div class="flex flex-wrap justify-center gap-3 md:gap-6 gs-fade">
+                    <span class="px-4 py-2 md:px-6 md:py-3 border border-ink/20 rounded-full text-sm md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-surface/30 md:bg-transparent">Animation</span>
+                    <span class="px-4 py-2 md:px-6 md:py-3 border border-ink/20 rounded-full text-sm md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-surface/30 md:bg-transparent">Cinema</span>
+                    <span class="px-4 py-2 md:px-6 md:py-3 border border-ink/20 rounded-full text-sm md:text-xl font-display font-bold uppercase tracking-tight text-ink/70 bg-surface/30 md:bg-transparent">Comic Creation</span>
                 </div>
             </div>
         </section>
 
-        <footer class="py-20 md:py-32 px-6 md:px-10 lg:px-20 border-t border-ink/10">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-                <div>
-                    <h2 class="font-display text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-ink">Bring concepts<br>to life.</h2>
-                    <p class="text-sm font-medium text-ink/70 max-w-sm mb-8">Seeking investments and creative collaborations to turn these blueprints into actual products.</p>
-                    <a href="mailto:hub9962@gmail.com" class="text-lg font-medium hover-underline inline-block cursor-pointer">hub9962@gmail.com</a>
+        <!-- Fixed Task 5: Mobile specific footer layout identical to updated index.html -->
+        <footer class="pt-16 pb-12 md:py-32 px-6 md:px-10 lg:px-20 bg-surface md:bg-transparent border-t border-ink/10 md:border-t md:border-ink/10 mt-10 md:mt-0 relative">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-10 md:gap-12">
+                
+                <div class="w-full md:w-auto">
+                    <!-- Adjusted mobile text sizing and spacing -->
+                    <h2 class="font-display text-5xl md:text-6xl font-black uppercase tracking-tighter mb-4 md:mb-4 text-ink">Bring concepts<br>to life.</h2>
+                    <p class="text-sm font-medium text-ink/70 max-w-sm mb-6 md:mb-8">Seeking investments and creative collaborations to turn these blueprints into actual products.</p>
+                    
+                    <!-- Added a full-width bottom border purely for mobile aesthetics -->
+                    <a href="mailto:hub9962@gmail.com" class="text-lg md:text-lg font-medium hover-underline inline-block w-full md:w-auto border-b border-ink/10 md:border-none pb-6 md:pb-0 cursor-pointer">hub9962@gmail.com</a>
                 </div>
                 
-                <div class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-ink/50 text-left md:text-right">
-                    <a href="https://github.com/ragespider" target="_blank" class="hover-underline cursor-pointer">Github</a>
-                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover-underline cursor-pointer">Facebook</a>
-                    <span class="mt-8">© 2026 Sazidur Rahman</span>
+                <!-- On mobile, links turn into a grid format, on PC they stack nicely -->
+                <div class="w-full md:w-auto grid grid-cols-2 md:flex md:flex-col gap-6 md:gap-4 text-xs font-bold uppercase tracking-widest text-ink/60 md:text-ink/50 text-left md:text-right pt-2 md:pt-0">
+                    <a href="https://github.com/ragespider" target="_blank" class="hover:text-ink transition-colors cursor-pointer">Github</a>
+                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover:text-ink transition-colors cursor-pointer">Facebook</a>
+                    <!-- Copyright spans two columns on mobile -->
+                    <span class="col-span-2 md:col-span-1 mt-6 md:mt-8 pt-6 border-t border-ink/10 md:border-none md:pt-0 text-ink/40 md:text-ink/50">© 2026 Sazidur Rahman</span>
                 </div>
+
             </div>
         </footer>
     </main>
@@ -326,6 +353,21 @@
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Mobile Menu Logic (Fixed Task 3)
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.style.transform = 'translateY(0)';
+            lenis.stop(); // Pause scrolling while menu is open
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.style.transform = 'translateY(-100%)';
+            lenis.start(); // Resume scrolling
+        });
 
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);

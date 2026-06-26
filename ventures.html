@@ -89,27 +89,46 @@
             <a href="manifesto.html" class="hover-underline">Manifesto</a>
         </div>
         
-        <button class="md:hidden text-sm uppercase font-bold tracking-widest cursor-pointer">Menu</button>
+        <!-- Mobile Menu Trigger -->
+        <button id="open-menu" class="md:hidden text-sm uppercase font-bold tracking-widest cursor-pointer p-2 -mr-2">Menu</button>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-ink z-[100] flex flex-col justify-between px-8 pt-24 pb-12 translate-y-[-100%] transition-transform duration-500 ease-[cubic-bezier(0.86,0,0.07,1)] md:hidden">
+        <button id="close-menu" class="absolute top-6 right-6 text-sm uppercase font-bold tracking-widest text-background p-2">Close</button>
+        
+        <div class="flex flex-col gap-6 text-4xl font-display uppercase font-bold tracking-tighter">
+            <a href="index.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Home</a>
+            <a href="studio.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">The Studio</a>
+            <a href="ventures.html" class="mobile-link block border-b border-background/10 pb-4 text-background">Ventures</a>
+            <a href="technology.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Technology</a>
+            <a href="manifesto.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Manifesto</a>
+        </div>
+
+        <div class="text-xs uppercase tracking-widest font-bold text-background/50">
+            <span>© 2026 Sazidur Rahman</span>
+        </div>
+    </div>
 
     <main>
         <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-32 pb-16">
+        <section class="min-h-[75vh] md:min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-32 md:pt-32 pb-12 md:pb-16">
             <div class="max-w-7xl mx-auto w-full relative">
                 
                 <div class="mb-6 md:mb-10 text-xs md:text-sm uppercase tracking-widest font-bold text-ink/50 gs-reveal">
                     Chapter 02
                 </div>
 
-                <h1 class="font-display font-black text-[12vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ink uppercase -ml-2 mb-12">
+                <h1 class="font-display font-black text-[14vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ink uppercase -ml-1 md:-ml-2 mb-10 md:mb-12">
                     <div class="line-mask"><span class="block gs-title translate-y-[110%]">Ventures</span></div>
                 </h1>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end">
-                    <div class="md:col-span-7 text-xl md:text-3xl font-medium leading-snug gs-reveal text-ink">
+                <!-- Mobile Card Wrap for the secondary text, returns to flat on PC -->
+                <div class="flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-12 md:items-end">
+                    <div class="md:col-span-7 text-lg md:text-3xl font-medium leading-snug gs-reveal text-ink order-1">
                         Communities, EdTech, and organizational infrastructure. Where engineering meets leadership.
                     </div>
-                    <div class="md:col-span-4 md:col-start-9 text-sm leading-relaxed gs-reveal text-ink/70">
+                    <div class="md:col-span-4 md:col-start-9 text-xs md:text-sm leading-relaxed gs-reveal text-ink/70 order-2 bg-surface/60 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none border border-ink/5 md:border-none shadow-sm md:shadow-none">
                         Establishing hubs for technological excellence and creating unified ecosystems for students and creators alike. This is the structural foundation.
                     </div>
                 </div>
@@ -118,88 +137,90 @@
         </section>
 
         <!-- The Roster: Organizations -->
-        <section class="py-20 px-6 md:px-10 lg:px-20">
+        <section class="pt-8 pb-20 md:py-20 px-6 md:px-10 lg:px-20">
             <div class="max-w-7xl mx-auto">
-                <div class="flex justify-between items-end mb-24 editorial-border pt-6 gs-fade">
-                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">Initiatives</h2>
-                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Active & Past</span>
+                <div class="flex justify-between items-end mb-10 md:mb-24 editorial-border pt-6 gs-fade">
+                    <h2 class="font-display text-2xl md:text-4xl font-bold uppercase tracking-tight">Initiatives</h2>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Active & Past</span>
                 </div>
 
-                <div class="flex flex-col gap-24">
+                <!-- Adjusted gap for mobile, keeping huge gaps for PC timeline -->
+                <div class="flex flex-col gap-8 md:gap-24">
                     
                     <!-- UCA -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 gs-fade">
-                        <div class="md:col-span-3 flex flex-col md:border-r border-ink/10">
-                            <span class="text-3xl md:text-5xl font-display font-bold text-ink mb-2">2025</span>
-                            <span class="text-xs uppercase tracking-widest font-bold text-ink/50">Established</span>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 gs-fade bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-3xl md:rounded-none border border-ink/5 md:border-none">
+                        <!-- Transformed PC sidebar to a Mobile top-header -->
+                        <div class="md:col-span-3 flex flex-row md:flex-col items-center md:items-start md:border-r border-ink/10 pb-4 md:pb-0 border-b border-ink/10 md:border-b-0 mb-2 md:mb-0">
+                            <span class="text-3xl md:text-5xl font-display font-bold text-ink mr-3 md:mr-0 md:mb-2">2025</span>
+                            <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/50 bg-background/80 md:bg-transparent px-3 py-1 md:p-0 rounded-full md:rounded-none border border-ink/10 md:border-none">Established</span>
                         </div>
-                        <div class="md:col-span-9">
-                            <div class="flex items-center gap-6 mb-4">
-                                <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-[#0a0a0a] flex items-center justify-center shrink-0 shadow-lg border border-ink/10 overflow-hidden">
+                        <div class="md:col-span-9 pt-2 md:pt-0">
+                            <div class="flex items-center gap-4 md:gap-6 mb-4 group cursor-default">
+                                <div class="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-[#0a0a0a] flex items-center justify-center shrink-0 shadow-lg border border-ink/10 overflow-hidden transition-transform duration-500 group-hover:scale-105">
                                     <img src="images/uca_logo.png" onerror="this.style.display='none'" alt="UCA Logo" class="w-full h-full object-contain p-2 md:p-3">
                                 </div>
-                                <h3 class="font-display text-5xl md:text-7xl font-black tracking-tighter uppercase text-ink m-0">
+                                <h3 class="font-display text-4xl md:text-7xl font-black tracking-tighter uppercase text-ink m-0">
                                     UCA
                                 </h3>
                             </div>
-                            <div class="flex items-center gap-4 mb-8">
-                                <span class="text-xs uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full text-ink">Founder</span>
-                                <span class="text-sm font-medium text-ink/60">United Club Association</span>
+                            <div class="flex flex-wrap items-center gap-3 md:gap-4 mb-6 md:mb-8">
+                                <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold border border-ink/20 bg-background/50 md:bg-transparent px-3 py-1 rounded-full text-ink">Founder</span>
+                                <span class="text-xs md:text-sm font-medium text-ink/60">United Club Association</span>
                             </div>
-                            <p class="text-lg md:text-xl leading-relaxed text-ink/80 max-w-3xl">
+                            <p class="text-sm md:text-xl leading-relaxed text-ink/80 max-w-3xl">
                                 Establishing the central hub for institutional club activities. The objective is to create a unified, scalable ecosystem that brings multiple student organizations and communities under one cohesive infrastructure.
                             </p>
-                            <a href="http://unitedclubassociation.netlify.app/" target="_blank" class="inline-flex items-center gap-2 mt-8 text-xs font-bold uppercase tracking-widest hover-underline text-ink">
-                                Visit Platform
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            <a href="http://unitedclubassociation.netlify.app/" target="_blank" class="group inline-flex items-center gap-2 mt-6 md:mt-8 text-xs font-bold uppercase tracking-widest text-ink transition-colors">
+                                <span class="hover-underline">Visit Platform</span>
+                                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
                         </div>
                     </div>
 
                     <!-- ULIC -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 gs-fade editorial-border pt-24">
-                        <div class="md:col-span-3 flex flex-col md:border-r border-ink/10">
-                            <span class="text-3xl md:text-5xl font-display font-bold text-ink mb-2">2024</span>
-                            <span class="text-xs uppercase tracking-widest font-bold text-ink/50">Established</span>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 gs-fade md:editorial-border md:pt-24 bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-3xl md:rounded-none border border-ink/5 md:border-none">
+                        <div class="md:col-span-3 flex flex-row md:flex-col items-center md:items-start md:border-r border-ink/10 pb-4 md:pb-0 border-b border-ink/10 md:border-b-0 mb-2 md:mb-0">
+                            <span class="text-3xl md:text-5xl font-display font-bold text-ink mr-3 md:mr-0 md:mb-2">2024</span>
+                            <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/50 bg-background/80 md:bg-transparent px-3 py-1 md:p-0 rounded-full md:rounded-none border border-ink/10 md:border-none">Established</span>
                         </div>
-                        <div class="md:col-span-9">
-                            <div class="flex items-center gap-6 mb-4">
-                                <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center shrink-0 shadow-lg border border-ink/10 overflow-hidden">
+                        <div class="md:col-span-9 pt-2 md:pt-0">
+                            <div class="flex items-center gap-4 md:gap-6 mb-4 group cursor-default">
+                                <div class="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center shrink-0 shadow-lg border border-ink/10 overflow-hidden transition-transform duration-500 group-hover:scale-105">
                                     <img src="images/ulic_logo.jpg" onerror="this.style.display='none'" alt="ULIC Logo" class="w-full h-full object-cover">
                                 </div>
-                                <h3 class="font-display text-5xl md:text-7xl font-black tracking-tighter uppercase text-ink m-0">
+                                <h3 class="font-display text-4xl md:text-7xl font-black tracking-tighter uppercase text-ink m-0">
                                     ULIC
                                 </h3>
                             </div>
-                            <div class="flex items-center gap-4 mb-8">
-                                <span class="text-xs uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full text-ink">Founder</span>
-                                <span class="text-sm font-medium text-ink/60">University Laboratory ICT Club</span>
+                            <div class="flex flex-wrap items-center gap-3 md:gap-4 mb-6 md:mb-8">
+                                <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold border border-ink/20 bg-background/50 md:bg-transparent px-3 py-1 rounded-full text-ink">Founder</span>
+                                <span class="text-xs md:text-sm font-medium text-ink/60">University Laboratory ICT Club</span>
                             </div>
-                            <p class="text-lg md:text-xl leading-relaxed text-ink/80 max-w-3xl">
+                            <p class="text-sm md:text-xl leading-relaxed text-ink/80 max-w-3xl">
                                 Built the premier technology community from the ground up. The initiative focuses on fostering a culture of technological excellence, modern web development, and peer-to-peer learning within the institution.
                             </p>
-                            <a href="http://ulic.netlify.app/" target="_blank" class="inline-flex items-center gap-2 mt-8 text-xs font-bold uppercase tracking-widest hover-underline text-ink">
-                                Visit Platform
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            <a href="http://ulic.netlify.app/" target="_blank" class="group inline-flex items-center gap-2 mt-6 md:mt-8 text-xs font-bold uppercase tracking-widest text-ink transition-colors">
+                                <span class="hover-underline">Visit Platform</span>
+                                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
                         </div>
                     </div>
 
                     <!-- Matrix:Origin -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 gs-fade editorial-border pt-24">
-                        <div class="md:col-span-3 flex flex-col md:border-r border-ink/10">
-                            <span class="text-3xl md:text-5xl font-display font-bold text-ink mb-2">24 to 25</span>
-                            <span class="text-xs uppercase tracking-widest font-bold text-ink/50">Tenure</span>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 gs-fade md:editorial-border md:pt-24 bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-3xl md:rounded-none border border-ink/5 md:border-none">
+                        <div class="md:col-span-3 flex flex-row md:flex-col items-center md:items-start md:border-r border-ink/10 pb-4 md:pb-0 border-b border-ink/10 md:border-b-0 mb-2 md:mb-0">
+                            <span class="text-3xl md:text-5xl font-display font-bold text-ink mr-3 md:mr-0 md:mb-2">24—25</span>
+                            <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/50 bg-background/80 md:bg-transparent px-3 py-1 md:p-0 rounded-full md:rounded-none border border-ink/10 md:border-none">Tenure</span>
                         </div>
-                        <div class="md:col-span-9">
-                            <h3 class="font-display text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4 text-ink">
+                        <div class="md:col-span-9 pt-2 md:pt-0">
+                            <h3 class="font-display text-3xl md:text-6xl font-black tracking-tighter uppercase mb-4 text-ink">
                                 Matrix<span class="opacity-50"> : </span>Origin
                             </h3>
-                            <div class="flex items-center gap-4 mb-8">
-                                <span class="text-xs uppercase tracking-widest font-bold border border-ink/20 px-3 py-1 rounded-full text-ink">President</span>
-                                <span class="text-sm font-medium text-ink/60">ULIC Executive Panel</span>
+                            <div class="flex flex-wrap items-center gap-3 md:gap-4 mb-6 md:mb-8">
+                                <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold border border-ink/20 bg-background/50 md:bg-transparent px-3 py-1 rounded-full text-ink">President</span>
+                                <span class="text-xs md:text-sm font-medium text-ink/60">ULIC Executive Panel</span>
                             </div>
-                            <p class="text-lg md:text-xl leading-relaxed text-ink/80 max-w-3xl">
+                            <p class="text-sm md:text-xl leading-relaxed text-ink/80 max-w-3xl">
                                 Leading executive operations and strategic planning for the 2024 to 2025 tenure. Orchestrating events, managing cross-functional teams, and driving organizational growth.
                             </p>
                         </div>
@@ -210,29 +231,34 @@
         </section>
 
         <!-- Philosophy Section -->
-        <section class="py-32 px-6 md:px-10 lg:px-20 bg-surface mt-12">
+        <section class="py-16 md:py-32 px-6 md:px-10 lg:px-20 bg-surface mt-10 md:mt-12">
             <div class="max-w-5xl mx-auto text-center gs-fade">
-                <span class="text-xs uppercase tracking-widest font-bold text-ink/50 block mb-12">The Philosophy</span>
-                <blockquote class="font-display text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight text-ink">
+                <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/50 block mb-8 md:mb-12">The Philosophy</span>
+                <blockquote class="font-display text-2xl md:text-5xl lg:text-6xl font-medium leading-[1.2] md:leading-[1.1] tracking-tight text-ink px-4 md:px-0">
                     "Leadership is not just about management. It's about creating ecosystems where creativity and engineering can coexist to solve real-world problems."
                 </blockquote>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="py-20 md:py-32 px-6 md:px-10 lg:px-20 border-t border-ink/10 bg-background">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-                <div>
-                    <h2 class="font-display text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-ink">Let's build<br>together.</h2>
-                    <p class="text-sm font-medium text-ink/70 max-w-sm mb-8">Open to investments, strategic partnerships, and creative collaborations.</p>
-                    <a href="mailto:hub9962@gmail.com" class="text-lg font-medium hover-underline inline-block cursor-pointer">hub9962@gmail.com</a>
+        <footer class="pt-16 pb-12 md:py-32 px-6 md:px-10 lg:px-20 border-t border-ink/10 bg-surface md:bg-background relative">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-10 md:gap-12">
+                
+                <div class="w-full md:w-auto">
+                    <h2 class="font-display text-5xl md:text-6xl font-black uppercase tracking-tighter mb-4 md:mb-4 text-ink">Let's build<br>together.</h2>
+                    <p class="text-sm font-medium text-ink/70 max-w-sm mb-6 md:mb-8">Open to investments, strategic partnerships, and creative collaborations.</p>
+                    
+                    <a href="mailto:hub9962@gmail.com" class="text-lg md:text-lg font-medium hover-underline inline-block w-full md:w-auto border-b border-ink/10 md:border-none pb-6 md:pb-0 cursor-pointer">hub9962@gmail.com</a>
                 </div>
                 
-                <div class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-ink/50 text-left md:text-right">
-                    <a href="https://github.com/ragespider" target="_blank" class="hover-underline cursor-pointer">Github</a>
-                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover-underline cursor-pointer">Facebook</a>
-                    <span class="mt-8">© 2026 Sazidur Rahman</span>
+                <!-- On mobile, links turn into a grid format, on PC they stack nicely -->
+                <div class="w-full md:w-auto grid grid-cols-2 md:flex md:flex-col gap-6 md:gap-4 text-xs font-bold uppercase tracking-widest text-ink/60 md:text-ink/50 text-left md:text-right pt-2 md:pt-0">
+                    <a href="https://github.com/ragespider" target="_blank" class="hover:text-ink transition-colors cursor-pointer">Github</a>
+                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover:text-ink transition-colors cursor-pointer">Facebook</a>
+                    <!-- Copyright spans two columns on mobile -->
+                    <span class="col-span-2 md:col-span-1 mt-6 md:mt-8 pt-6 border-t border-ink/10 md:border-none md:pt-0 text-ink/40 md:text-ink/50">© 2026 Sazidur Rahman</span>
                 </div>
+
             </div>
         </footer>
     </main>
@@ -255,6 +281,21 @@
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.style.transform = 'translateY(0)';
+            lenis.stop(); // Pause scrolling while menu is open
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.style.transform = 'translateY(-100%)';
+            lenis.start(); // Resume scrolling
+        });
 
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);

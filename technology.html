@@ -76,7 +76,9 @@
 
         /* Project row hover effect */
         .project-row { transition: all 0.4s ease; cursor: pointer; }
-        .project-row:hover { background-color: rgba(26, 26, 26, 0.03); padding-left: 1rem; padding-right: 1rem; }
+        @media (min-width: 768px) {
+            .project-row:hover { background-color: rgba(26, 26, 26, 0.03); padding-left: 1rem; padding-right: 1rem; }
+        }
         .project-arrow { opacity: 0; transform: translateX(-10px); transition: all 0.4s ease; }
         .project-row:hover .project-arrow { opacity: 1; transform: translateX(0); }
     </style>
@@ -94,26 +96,43 @@
             <a href="manifesto.html" class="hover-underline">Manifesto</a>
         </div>
         
-        <button class="md:hidden text-sm uppercase font-bold tracking-widest cursor-pointer">Menu</button>
+        <button id="open-menu" class="md:hidden text-sm uppercase font-bold tracking-widest cursor-pointer p-2 -mr-2">Menu</button>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-ink z-[100] flex flex-col justify-between px-8 pt-24 pb-12 translate-y-[-100%] transition-transform duration-500 ease-[cubic-bezier(0.86,0,0.07,1)] md:hidden">
+        <button id="close-menu" class="absolute top-6 right-6 text-sm uppercase font-bold tracking-widest text-background p-2">Close</button>
+        
+        <div class="flex flex-col gap-6 text-4xl font-display uppercase font-bold tracking-tighter">
+            <a href="index.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Home</a>
+            <a href="studio.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">The Studio</a>
+            <a href="ventures.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Ventures</a>
+            <a href="technology.html" class="mobile-link block border-b border-background/10 pb-4 text-background">Technology</a>
+            <a href="manifesto.html" class="mobile-link block border-b border-background/10 pb-4 text-background/50 hover:text-background transition-colors">Manifesto</a>
+        </div>
+
+        <div class="text-xs uppercase tracking-widest font-bold text-background/50">
+            <span>© 2026 Sazidur Rahman</span>
+        </div>
+    </div>
+
     <main>
-        <section class="min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-32 pb-16">
+        <section class="min-h-[75vh] md:min-h-screen flex flex-col justify-center px-6 md:px-10 lg:px-20 pt-32 md:pt-32 pb-12 md:pb-16">
             <div class="max-w-7xl mx-auto w-full relative">
                 
                 <div class="mb-6 md:mb-10 text-xs md:text-sm uppercase tracking-widest font-bold text-ink/50 gs-reveal">
                     Chapter 03
                 </div>
 
-                <h1 class="font-display font-black text-[12vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ink uppercase -ml-2 mb-12">
+                <h1 class="font-display font-black text-[14vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ink uppercase -ml-1 md:-ml-2 mb-10 md:mb-12">
                     <div class="line-mask"><span class="block gs-title translate-y-[110%]">Technology</span></div>
                 </h1>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end">
-                    <div class="md:col-span-7 text-xl md:text-3xl font-medium leading-snug gs-reveal text-ink">
+                <div class="flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-12 md:items-end">
+                    <div class="md:col-span-7 text-lg md:text-3xl font-medium leading-snug gs-reveal text-ink order-1">
                         Before cinema and games, the canvas was pure code. Engineering scalable web architectures and digital systems.
                     </div>
-                    <div class="md:col-span-4 md:col-start-9 text-sm leading-relaxed gs-reveal text-ink/70">
+                    <div class="md:col-span-4 md:col-start-9 text-xs md:text-sm leading-relaxed gs-reveal text-ink/70 order-2 bg-surface/60 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none border border-ink/5 md:border-none shadow-sm md:shadow-none">
                         This is the technical foundation. While my focus has expanded into broader world-building, software engineering remains the structural backbone of everything I create.
                     </div>
                 </div>
@@ -121,19 +140,19 @@
             </div>
         </section>
 
-        <section class="py-20 px-6 md:px-10 lg:px-20 bg-surface">
+        <section class="py-16 md:py-20 px-6 md:px-10 lg:px-20 bg-surface">
             <div class="max-w-7xl mx-auto">
-                <div class="flex justify-between items-end mb-16 editorial-border border-ink/20 pt-6 gs-fade">
-                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">The Arsenal</h2>
-                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Languages & Frameworks</span>
+                <div class="flex justify-between items-end mb-10 md:mb-16 md:editorial-border border-ink/20 pt-6 gs-fade border-t border-ink/10">
+                    <h2 class="font-display text-2xl md:text-4xl font-bold uppercase tracking-tight">The Arsenal</h2>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Languages & Frameworks</span>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 gs-fade">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 gs-fade">
                     
                     <!-- Core -->
-                    <div class="flex flex-col gap-4">
-                        <h3 class="text-xs uppercase tracking-widest font-bold text-ink/50 border-b border-ink/10 pb-4 mb-2">Core</h3>
-                        <ul class="flex flex-col gap-2 font-medium text-lg">
+                    <div class="flex flex-col gap-4 bg-background/50 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none border border-ink/10 md:border-none shadow-sm md:shadow-none">
+                        <h3 class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/50 border-b border-ink/10 pb-4 mb-2">Core</h3>
+                        <ul class="flex flex-col gap-2 font-medium text-base md:text-lg">
                             <li>HTML / CSS</li>
                             <li>JavaScript</li>
                             <li>JSON</li>
@@ -142,9 +161,9 @@
                     </div>
 
                     <!-- Creative -->
-                    <div class="flex flex-col gap-4">
-                        <h3 class="text-xs uppercase tracking-widest font-bold text-ink/50 border-b border-ink/10 pb-4 mb-2">Creative & Motion</h3>
-                        <ul class="flex flex-col gap-2 font-medium text-lg">
+                    <div class="flex flex-col gap-4 bg-background/50 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none border border-ink/10 md:border-none shadow-sm md:shadow-none">
+                        <h3 class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/50 border-b border-ink/10 pb-4 mb-2">Creative & Motion</h3>
+                        <ul class="flex flex-col gap-2 font-medium text-base md:text-lg">
                             <li>GSAP</li>
                             <li>Three.js</li>
                             <li>WebGL</li>
@@ -153,9 +172,9 @@
                     </div>
 
                     <!-- Frameworks -->
-                    <div class="flex flex-col gap-4">
-                        <h3 class="text-xs uppercase tracking-widest font-bold text-ink/50 border-b border-ink/10 pb-4 mb-2">Frameworks</h3>
-                        <ul class="flex flex-col gap-2 font-medium text-lg">
+                    <div class="flex flex-col gap-4 bg-background/50 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none border border-ink/10 md:border-none shadow-sm md:shadow-none">
+                        <h3 class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/50 border-b border-ink/10 pb-4 mb-2">Frameworks</h3>
+                        <ul class="flex flex-col gap-2 font-medium text-base md:text-lg">
                             <li>React</li>
                             <li>Next.js</li>
                             <li>Tailwind CSS</li>
@@ -164,9 +183,9 @@
                     </div>
 
                     <!-- Backend -->
-                    <div class="flex flex-col gap-4">
-                        <h3 class="text-xs uppercase tracking-widest font-bold text-ink/50 border-b border-ink/10 pb-4 mb-2">Backend & Data</h3>
-                        <ul class="flex flex-col gap-2 font-medium text-lg">
+                    <div class="flex flex-col gap-4 bg-background/50 md:bg-transparent p-6 md:p-0 rounded-2xl md:rounded-none border border-ink/10 md:border-none shadow-sm md:shadow-none">
+                        <h3 class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/50 border-b border-ink/10 pb-4 mb-2">Backend & Data</h3>
+                        <ul class="flex flex-col gap-2 font-medium text-base md:text-lg">
                             <li>PostgreSQL</li>
                             <li>Supabase</li>
                             <li>MS Access</li>
@@ -178,90 +197,90 @@
             </div>
         </section>
 
-        <section class="py-32 px-6 md:px-10 lg:px-20">
+        <section class="py-16 md:py-32 px-6 md:px-10 lg:px-20">
             <div class="max-w-7xl mx-auto">
-                <div class="flex justify-between items-end mb-16 editorial-border pt-6 gs-fade">
-                    <h2 class="font-display text-4xl font-bold uppercase tracking-tight">The Archive</h2>
-                    <span class="text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Selected Works 24—25</span>
+                <div class="flex justify-between items-end mb-10 md:mb-16 md:editorial-border pt-6 gs-fade border-t border-ink/10">
+                    <h2 class="font-display text-2xl md:text-4xl font-bold uppercase tracking-tight">The Archive</h2>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/50 text-right">Selected Works</span>
                 </div>
 
-                <div class="flex flex-col border-t border-ink/10">
+                <div class="flex flex-col md:border-t border-ink/10">
                     
                     <!-- UCA -->
-                    <a href="http://unitedclubassociation.netlify.app/" target="_blank" class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 project-row gs-fade block">
-                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2025</div>
+                    <a href="http://unitedclubassociation.netlify.app/" target="_blank" class="flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8 md:items-center py-6 md:py-8 border border-ink/10 md:border-t-0 md:border-l-0 md:border-r-0 md:border-b project-row gs-fade block bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-[1.5rem] md:rounded-none mb-6 md:mb-0 group relative">
+                        <div class="md:col-span-1 text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/40 bg-background/80 md:bg-transparent px-3 py-1 md:p-0 rounded-full md:rounded-none w-fit mb-2 md:mb-0 border border-ink/10 md:border-none">2025</div>
                         <div class="md:col-span-4">
-                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">United Club Association</h3>
+                            <h3 class="font-display text-2xl md:text-3xl font-bold uppercase tracking-tight pr-8 md:pr-0">United Club Association</h3>
                         </div>
-                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Platform Engineering</div>
-                        <div class="md:col-span-3 flex flex-wrap gap-2">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">GSAP</span>
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Tailwind</span>
+                        <div class="md:col-span-3 text-xs md:text-sm font-medium text-ink/70">Platform Engineering</div>
+                        <div class="md:col-span-3 flex flex-wrap gap-2 mt-2 md:mt-0">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 md:px-2 py-1 rounded-full text-ink bg-background/50 md:bg-transparent">GSAP</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 md:px-2 py-1 rounded-full text-ink bg-background/50 md:bg-transparent">Tailwind</span>
                         </div>
-                        <div class="md:col-span-1 text-right hidden md:block">
-                            <svg class="w-6 h-6 inline-block project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        <div class="absolute right-6 top-6 md:static md:col-span-1 text-right text-ink/30 md:text-ink">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 inline-block md:project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </div>
                     </a>
 
                     <!-- ULIC App -->
-                    <a href="https://ulicapp.vercel.app/" target="_blank" class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 project-row gs-fade block">
-                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2025</div>
+                    <a href="https://ulicapp.vercel.app/" target="_blank" class="flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8 md:items-center py-6 md:py-8 border border-ink/10 md:border-t-0 md:border-l-0 md:border-r-0 md:border-b project-row gs-fade block bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-[1.5rem] md:rounded-none mb-6 md:mb-0 group relative">
+                        <div class="md:col-span-1 text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/40 bg-background/80 md:bg-transparent px-3 py-1 md:p-0 rounded-full md:rounded-none w-fit mb-2 md:mb-0 border border-ink/10 md:border-none">2025</div>
                         <div class="md:col-span-4">
-                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">ULIC Web App</h3>
+                            <h3 class="font-display text-2xl md:text-3xl font-bold uppercase tracking-tight pr-8 md:pr-0">ULIC Web App</h3>
                         </div>
-                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Dynamic Web Application</div>
-                        <div class="md:col-span-3 flex flex-wrap gap-2">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Next.js</span>
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Supabase</span>
+                        <div class="md:col-span-3 text-xs md:text-sm font-medium text-ink/70">Dynamic Web Application</div>
+                        <div class="md:col-span-3 flex flex-wrap gap-2 mt-2 md:mt-0">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 md:px-2 py-1 rounded-full text-ink bg-background/50 md:bg-transparent">Next.js</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 md:px-2 py-1 rounded-full text-ink bg-background/50 md:bg-transparent">Supabase</span>
                         </div>
-                        <div class="md:col-span-1 text-right hidden md:block">
-                            <svg class="w-6 h-6 inline-block project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        <div class="absolute right-6 top-6 md:static md:col-span-1 text-right text-ink/30 md:text-ink">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 inline-block md:project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </div>
                     </a>
 
                     <!-- ULIC Portal -->
-                    <a href="http://ulic.netlify.app/" target="_blank" class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 project-row gs-fade block">
-                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2024</div>
+                    <a href="http://ulic.netlify.app/" target="_blank" class="flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8 md:items-center py-6 md:py-8 border border-ink/10 md:border-t-0 md:border-l-0 md:border-r-0 md:border-b project-row gs-fade block bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-[1.5rem] md:rounded-none mb-6 md:mb-0 group relative">
+                        <div class="md:col-span-1 text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/40 bg-background/80 md:bg-transparent px-3 py-1 md:p-0 rounded-full md:rounded-none w-fit mb-2 md:mb-0 border border-ink/10 md:border-none">2024</div>
                         <div class="md:col-span-4">
-                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">ULIC Portal</h3>
+                            <h3 class="font-display text-2xl md:text-3xl font-bold uppercase tracking-tight pr-8 md:pr-0">ULIC Portal</h3>
                         </div>
-                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Community Architecture</div>
-                        <div class="md:col-span-3 flex flex-wrap gap-2">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">GSAP</span>
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">HTML/CSS</span>
+                        <div class="md:col-span-3 text-xs md:text-sm font-medium text-ink/70">Community Architecture</div>
+                        <div class="md:col-span-3 flex flex-wrap gap-2 mt-2 md:mt-0">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 md:px-2 py-1 rounded-full text-ink bg-background/50 md:bg-transparent">GSAP</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 md:px-2 py-1 rounded-full text-ink bg-background/50 md:bg-transparent">HTML/CSS</span>
                         </div>
-                        <div class="md:col-span-1 text-right hidden md:block">
-                            <svg class="w-6 h-6 inline-block project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        <div class="absolute right-6 top-6 md:static md:col-span-1 text-right text-ink/30 md:text-ink">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 inline-block md:project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </div>
                     </a>
 
                     <!-- Frame of Revolution -->
-                    <a href="https://frbd.netlify.app/" target="_blank" class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 project-row gs-fade block">
-                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2024</div>
+                    <a href="https://frbd.netlify.app/" target="_blank" class="flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8 md:items-center py-6 md:py-8 border border-ink/10 md:border-t-0 md:border-l-0 md:border-r-0 md:border-b project-row gs-fade block bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-[1.5rem] md:rounded-none mb-6 md:mb-0 group relative">
+                        <div class="md:col-span-1 text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/40 bg-background/80 md:bg-transparent px-3 py-1 md:p-0 rounded-full md:rounded-none w-fit mb-2 md:mb-0 border border-ink/10 md:border-none">2024</div>
                         <div class="md:col-span-4">
-                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">Frame of Revolution</h3>
+                            <h3 class="font-display text-2xl md:text-3xl font-bold uppercase tracking-tight pr-8 md:pr-0">Frame of Revolution</h3>
                         </div>
-                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Event Architecture & Auth</div>
-                        <div class="md:col-span-3 flex flex-wrap gap-2">
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Supabase</span>
-                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-2 py-1 rounded-full text-ink/70">Backend</span>
+                        <div class="md:col-span-3 text-xs md:text-sm font-medium text-ink/70">Event Architecture & Auth</div>
+                        <div class="md:col-span-3 flex flex-wrap gap-2 mt-2 md:mt-0">
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 md:px-2 py-1 rounded-full text-ink bg-background/50 md:bg-transparent">Supabase</span>
+                            <span class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 md:px-2 py-1 rounded-full text-ink bg-background/50 md:bg-transparent">Backend</span>
                         </div>
-                        <div class="md:col-span-1 text-right hidden md:block">
-                            <svg class="w-6 h-6 inline-block project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        <div class="absolute right-6 top-6 md:static md:col-span-1 text-right text-ink/30 md:text-ink">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 inline-block md:project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </div>
                     </a>
 
                     <!-- Memory Series -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-8 border-b border-ink/10 gs-fade">
-                        <div class="md:col-span-1 text-xs uppercase tracking-widest font-bold text-ink/40">2024</div>
+                    <div class="flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8 md:items-center py-6 md:py-8 border border-ink/10 md:border-t-0 md:border-l-0 md:border-r-0 md:border-b gs-fade bg-surface/40 md:bg-transparent p-6 md:p-0 rounded-[1.5rem] md:rounded-none mb-6 md:mb-0">
+                        <div class="md:col-span-1 text-[10px] md:text-xs uppercase tracking-widest font-bold text-ink/80 md:text-ink/40 bg-background/80 md:bg-transparent px-3 py-1 md:p-0 rounded-full md:rounded-none w-fit mb-2 md:mb-0 border border-ink/10 md:border-none">2024</div>
                         <div class="md:col-span-4">
-                            <h3 class="font-display text-3xl font-bold uppercase tracking-tight">Memory Series</h3>
+                            <h3 class="font-display text-2xl md:text-3xl font-bold uppercase tracking-tight">Memory Series</h3>
                         </div>
-                        <div class="md:col-span-3 text-sm font-medium text-ink/70">Digital Archives</div>
-                        <div class="md:col-span-4 flex flex-wrap gap-2">
-                            <a href="https://ulabhsc26asec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer">Sec A</a>
-                            <a href="https://ulabhsc26bsec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer">Sec B</a>
-                            <a href="https://ulabhsc26hsec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer">Sec H</a>
+                        <div class="md:col-span-3 text-xs md:text-sm font-medium text-ink/70">Digital Archives</div>
+                        <div class="md:col-span-4 flex flex-wrap gap-2 mt-2 md:mt-0">
+                            <a href="https://ulabhsc26asec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-4 md:px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer bg-background/50 md:bg-transparent">Sec A</a>
+                            <a href="https://ulabhsc26bsec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-4 md:px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer bg-background/50 md:bg-transparent">Sec B</a>
+                            <a href="https://ulabhsc26hsec.netlify.app/" target="_blank" class="text-[10px] uppercase tracking-widest font-bold border border-ink/20 px-4 md:px-3 py-1.5 rounded-full text-ink hover:bg-ink hover:text-background transition-colors cursor-pointer bg-background/50 md:bg-transparent">Sec H</a>
                         </div>
                     </div>
 
@@ -269,17 +288,18 @@
             </div>
         </section>
 
-        <footer class="py-20 md:py-32 px-6 md:px-10 lg:px-20 border-t border-ink/10 bg-background">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-                <div>
-                    <h2 class="font-display text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-ink">Let's build<br>a world.</h2>
-                    <a href="mailto:hub9962@gmail.com" class="text-lg font-medium hover-underline inline-block cursor-pointer">hub9962@gmail.com</a>
+        <footer class="pt-16 pb-12 md:py-32 px-6 md:px-10 lg:px-20 bg-surface md:bg-background border-t border-ink/10 relative">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-10 md:gap-12">
+                
+                <div class="w-full md:w-auto">
+                    <h2 class="font-display text-5xl md:text-6xl font-black uppercase tracking-tighter mb-4 md:mb-6 text-ink">Let's build<br>a world.</h2>
+                    <a href="mailto:hub9962@gmail.com" class="text-lg md:text-lg font-medium hover-underline inline-block w-full md:w-auto border-b border-ink/10 md:border-none pb-6 md:pb-0 cursor-pointer">hub9962@gmail.com</a>
                 </div>
                 
-                <div class="flex flex-col gap-4 text-xs font-bold uppercase tracking-widest text-ink/50 text-left md:text-right">
-                    <a href="https://github.com/ragespider" target="_blank" class="hover-underline cursor-pointer">Github</a>
-                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover-underline cursor-pointer">Facebook</a>
-                    <span class="mt-8">© 2026 Sazidur Rahman</span>
+                <div class="w-full md:w-auto grid grid-cols-2 md:flex md:flex-col gap-6 md:gap-4 text-xs font-bold uppercase tracking-widest text-ink/60 md:text-ink/50 text-left md:text-right pt-2 md:pt-0">
+                    <a href="https://github.com/ragespider" target="_blank" class="hover:text-ink transition-colors cursor-pointer">Github</a>
+                    <a href="https://facebook.com/SazidSaysAnything" target="_blank" class="hover:text-ink transition-colors cursor-pointer">Facebook</a>
+                    <span class="col-span-2 md:col-span-1 mt-6 md:mt-8 pt-6 border-t border-ink/10 md:border-none md:pt-0 text-ink/40 md:text-ink/50">© 2026 Sazidur Rahman</span>
                 </div>
             </div>
         </footer>
@@ -303,6 +323,21 @@
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.style.transform = 'translateY(0)';
+            lenis.stop(); // Pause scrolling while menu is open
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.style.transform = 'translateY(-100%)';
+            lenis.start(); // Resume scrolling
+        });
 
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
